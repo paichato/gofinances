@@ -1,11 +1,14 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { Container, Title } from './styles'
+import { Container, Title, Header } from './styles'
 
 export default function Dashboard() {
     return (
         <Container>
-            <Title>Dashboard</Title>
+            <Header>
+            <Title>Dashboard</Title>    
+            </Header>
+            
         </Container>
     )
 }
