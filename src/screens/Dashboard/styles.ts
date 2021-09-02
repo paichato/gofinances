@@ -22,18 +22,32 @@ align-items: center;
 justify-content: center;
 
 `
+export const UserWrapper=styled.View`
+
+width: 100%;
+padding:0 24px;
+`
 
 export const UserInfo=styled.View`
 flex-direction: row;
+align-items: center;
 `
 export const Photo=styled.Image`
-width: ${RFValue(55)}px;
-height: ${RFValue(55)}px;
+width: ${RFValue(48)}px;
+height: ${RFValue(48)}px;
 border-radius: 10px;
  `
 export const User=styled.View`
+margin-left: 17px;
  `
 export const UserGreeting=styled.Text`
+color: ${({theme})=>theme.colors.shape};
+font-size: ${RFValue(18)}px;
+font-family: ${({theme})=>theme.fonts.regular};
  `
 export const Username=styled.Text`
+
+color: ${({theme})=>theme.colors.shape};
+font-size: ${RFValue(18)}px;
+font-family: ${({theme})=>theme.fonts.bold};
  `
