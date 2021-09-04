@@ -62,3 +62,13 @@ font-family: ${({theme})=>theme.fonts.bold};
 
  
  `
+
+ export const HighlightCards=styled.ScrollView.attrs({
+    horizontal:true,
+     showsHorizontalScrollIndicator:false,
+      contentContainerStyle:{paddingHorizontal:24}
+ })`
+ 
+
+ 
+ `
