@@ -8,7 +8,7 @@ interface Category{
     icon:string
 }
 
-interface Props{
+export interface TransactionCardProps{
     data:{
         title:string,
         amount: string,
@@ -20,7 +20,7 @@ interface Props{
 }
 
 
-export default function TransactionCard({data}:Props) {
+export default function TransactionCard({data}:TransactionCardProps) {
 
   
 

@@ -42,5 +42,7 @@ font-size: ${RFValue(20)}px;
 color:${({theme})=>theme.colors.text}
 
 `
-export const CategoryName =styled.Text``
+export const CategoryName =styled.Text`
+margin-left: 10px;
+`
 export const Date =styled.Text``
