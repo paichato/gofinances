@@ -1,6 +1,8 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { Container, Title, Header, UserInfo, Photo,User,UserGreeting,Username, UserWrapper } from './styles'
+import { Container, Title, Header, UserInfo, Photo,User,UserGreeting,Username, UserWrapper, Icon } from './styles'
+
+
 
 export default function Dashboard() {
     return (
@@ -16,6 +18,7 @@ export default function Dashboard() {
                     </User>
                     
                </UserInfo>
+               <Icon name='power'/>
                 </UserWrapper>
                
             </Header>
