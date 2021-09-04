@@ -19,12 +19,12 @@ export default function HighlightCard({title,amount,lastTransaction, type}:Props
     return (
         <Container type={type} >
             <Header>
-                <Title>{title}</Title>
+                <Title type={type}>{title}</Title>
                 <Icon name={icon[type]} type={type} />
             </Header>
             <Footer>
-                <Amount>{amount}</Amount>
-                <LastTransaction>{lastTransaction}</LastTransaction>
+                <Amount type={type} >{amount}</Amount>
+                <LastTransaction type={type} >{lastTransaction}</LastTransaction>
             </Footer>
 
         </Container>
