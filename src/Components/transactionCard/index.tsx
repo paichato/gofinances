@@ -2,19 +2,38 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { Container, Title,Amount,Footer,Category,Icon,CategoryName,Date } from './styles'
 
+interface Category{
+    name:string,
+    // key:string,
+    icon:string
+}
 
-export default function TransactionCard() {
+interface Props{
+    data:{
+        title:string,
+        amount: string,
+    category:Category,
+    date:string}
+
+}
+
+
+export default function TransactionCard({data}:Props) {
+
+  
+
+
     return (
         <Container>
-            <Title>Desenvolvimento de site</Title>
-            <Amount>12.000,00 MT</Amount>
+            <Title>{data.title}</Title>
+            <Amount>{data.amount} MT</Amount>
 
             <Footer>
                 <Category>
-                    <Icon name='dollar-sign' />
-                    <CategoryName>Vendas</CategoryName>
+                    <Icon name={data.category.icon} />
+                    <CategoryName>{data.category.name}</CategoryName>
                 </Category>
-                <Date>13/04/2020</Date>
+                <Date>{data.date}</Date>
             </Footer>
         </Container>
     )
