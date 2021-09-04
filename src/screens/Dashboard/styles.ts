@@ -77,3 +77,17 @@ font-family: ${({theme})=>theme.fonts.bold};
 
  
  `
+
+ export const Transactions=styled.View`
+ flex:1;
+ padding: 0 24px;
+ margin-top: ${RFPercentage(12)}px;
+ `
+
+ export const TitleTrans=styled.Text`
+ font-size: ${RFValue(18)}px;
+/* color: ${({theme})=>theme.colors.title}; */
+font-family:${({theme})=>theme.fonts.regular} ;
+margin-bottom: 16px;
+
+ `

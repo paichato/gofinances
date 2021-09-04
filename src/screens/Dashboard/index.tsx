@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import HighlightCard from "../../Components/highlightCard";
+import TransactionCard from "../../Components/transactionCard";
 import {
   Container,
   Title,
@@ -13,6 +14,8 @@ import {
   UserWrapper,
   Icon,
   HighlightCards,
+  Transactions,
+  TitleTrans
 } from "./styles";
 
 export default function Dashboard() {
@@ -39,6 +42,10 @@ export default function Dashboard() {
         <HighlightCard type='down' title='Entradas' amount='8.400,00 MT' lastTransaction='Ultima entrada dia 13 de Junho' />
         <HighlightCard type='total' title='Entradas' amount='400,00 MT' lastTransaction='Ultima entrada dia 13 de Setembro' />
       </HighlightCards>
+    <Transactions>
+        <TitleTrans>Listagem</TitleTrans>
+              <TransactionCard/>
+    </Transactions>
     </Container>
   );
 }
