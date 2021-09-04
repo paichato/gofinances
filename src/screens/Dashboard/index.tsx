@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text } from 'react-native'
+import HighlightCard from '../../Components/highlightCard'
 import { Container, Title, Header, UserInfo, Photo,User,UserGreeting,Username, UserWrapper, Icon } from './styles'
 
 
@@ -22,7 +23,7 @@ export default function Dashboard() {
                 </UserWrapper>
                
             </Header>
-            {/* <Title>Dashboard</Title> */}
+          <HighlightCard/>
             
         </Container>
     )
