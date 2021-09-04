@@ -9,12 +9,18 @@ interface Props{
     type:'up'|'down'|'total'
 }
 
-export default function HighlightCard({title,amount,lastTransaction}:Props) {
+const icon={
+    up:'arrow-up-circle',
+    down:'arrow-down-circle',
+    total:'dollar-sign'
+}
+
+export default function HighlightCard({title,amount,lastTransaction, type}:Props) {
     return (
-        <Container>
+        <Container type={type} >
             <Header>
                 <Title>{title}</Title>
-                <Icon name='arrow-up-circle' />
+                <Icon name={icon[type]} type={type} />
             </Header>
             <Footer>
                 <Amount>{amount}</Amount>
