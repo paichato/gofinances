@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { Container, Header, Title, Icon, Footer, Amount, LastTransaction } from './styles'
 
+
 interface Props{
     title:string;
     amount:string;
@@ -17,7 +18,8 @@ const icon={
 
 export default function HighlightCard({title,amount,lastTransaction, type}:Props) {
     return (
-        <Container type={type} >
+     
+             <Container type={type} >
             <Header>
                 <Title type={type}>{title}</Title>
                 <Icon name={icon[type]} type={type} />
@@ -28,5 +30,7 @@ export default function HighlightCard({title,amount,lastTransaction, type}:Props
             </Footer>
 
         </Container>
+       
+       
     )
 }

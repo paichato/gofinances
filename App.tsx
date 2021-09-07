@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components/native';
 import theme from './src/global/styles/theme';
 import {useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold} from '@expo-google-fonts/poppins'
 import AppLoading from 'expo-app-loading'
+import Register from './src/Components/Register';
 
 export default function App() {
 
@@ -22,7 +23,8 @@ if(!fontsLoaded){
     <ThemeProvider theme={theme}>
 <View style={styles.container}>
       {/* <Welcome title='Sup dude'/> */}
-      <Dashboard/>
+      {/* <Dashboard/> */}
+      <Register/>
       <StatusBar style="auto" />
     </View>
     </ThemeProvider>
