@@ -1,10 +1,11 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacityProps } from 'react-native'
 import { Container, Icon,Title } from './styles'
 
-interface Props{
+interface Props extends TouchableOpacityProps{
     title:string,
-    type:'up' | 'down'
+    type:'up' | 'down',
+    isActive:boolean;
 }
 
 const icons={
