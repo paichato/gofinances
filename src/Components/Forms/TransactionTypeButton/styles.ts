@@ -5,13 +5,13 @@ import {Feather} from '@expo/vector-icons'
 
 
 export const Container=styled(TouchableOpacity)`
-width:100%;
+width:48%;
 
 flex-direction: row;
 align-items: center;
 border: 1.5px solid ${({theme})=>theme.colors.text};
 border-radius: 5px;
-padding: 16px 59px;
+padding: 16px;
 justify-content: center;
 
 `
