@@ -13,9 +13,9 @@ const icons={
     down:'arrow-down-circle'
 }
 
-export default function TransactionTypeButton({title,type,...rest}:Props) {
+export default function TransactionTypeButton({title,type,isActive,...rest}:Props) {
     return (
-        <Container {...rest}>
+        <Container type={type} isActive={isActive} {...rest}>
             <Icon type={type} name={icons[type]}/>
             <Title>{title}</Title>
         </Container>

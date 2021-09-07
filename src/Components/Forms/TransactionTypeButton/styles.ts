@@ -1,13 +1,18 @@
 import { RFValue } from 'react-native-responsive-fontsize';
 import { TouchableOpacity } from 'react-native';
-import styled from "styled-components/native";
+import styled, {css} from "styled-components/native";
 import {Feather} from '@expo/vector-icons'
 
 interface IconProps{
     type:'up' | 'down';
 }
 
-export const Container=styled(TouchableOpacity)`
+interface ContainerProps{
+    isActive:boolean;
+    type:'up' | 'down';
+}
+
+export const Container=styled(TouchableOpacity)<ContainerProps>`
 width:48%;
 
 flex-direction: row;
@@ -17,6 +22,13 @@ border-radius: 5px;
 padding: 16px;
 justify-content: center;
 
+${({isActive, type})=>isActive && type==='up' && css`
+background-color: ${({theme})=>theme.colors.success_light}; border: none;
+`}
+
+${({isActive, type})=>isActive && type==='down' && css`
+background-color: ${({theme})=>theme.colors.attention_light}; border: none;
+`}
 `
 
 export const Icon=styled(Feather)<IconProps>`

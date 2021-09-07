@@ -10,7 +10,7 @@ export default function Register() {
     const [transactionType, setTransactionType] = useState('');
 
     const handleTransactionsTypeSelect =(type:'up'|'down')=>{
-
+        setTransactionType(type);
     }
 
   return (
