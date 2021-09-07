@@ -13,9 +13,9 @@ export default function Register() {
       </Header>
       <Form>
           <Fields>
-          <Input/>
-      <Input/>
-      <TransactionTypeButton/>
+          <Input placeholder='preco'/>
+      <Input placeholder='preco'/>
+      <TransactionTypeButton type='up' title='income'/>
           </Fields>
       
       <Button title='enviar'/>

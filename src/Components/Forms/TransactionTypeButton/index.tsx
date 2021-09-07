@@ -1,11 +1,22 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { Container } from './styles'
+import { Container, Icon,Title } from './styles'
 
-export default function TransactionTypeButton() {
+interface Props{
+    title:string,
+    type:'up' | 'down'
+}
+
+const icons={
+    up:'arrow-up-circle',
+    down:'arrow-down-circle'
+}
+
+export default function TransactionTypeButton({title,type,...rest}:Props) {
     return (
-        <Container>
-            <Text></Text>
+        <Container {...rest}>
+            <Icon name={icons[type]}/>
+            <Title>{title}</Title>
         </Container>
     )
 }
