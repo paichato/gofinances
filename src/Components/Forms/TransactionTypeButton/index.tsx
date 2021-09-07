@@ -15,7 +15,7 @@ const icons={
 export default function TransactionTypeButton({title,type,...rest}:Props) {
     return (
         <Container {...rest}>
-            <Icon name={icons[type]}/>
+            <Icon type={type} name={icons[type]}/>
             <Title>{title}</Title>
         </Container>
     )
