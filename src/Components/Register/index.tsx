@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 import Button from "../Forms/Button";
+import CategorySelect from "../Forms/CategorySelect";
 import Input from "../Forms/Input";
 import TransactionTypeButton from "../Forms/TransactionTypeButton";
 import {Container,Header,Title,Form,Fields, TransactionTypes} from './styles'
@@ -26,6 +27,8 @@ export default function Register() {
       <TransactionTypeButton isActive={transactionType==='up'} onPress={()=>handleTransactionsTypeSelect('up')} type='up' title='Income'/>
       <TransactionTypeButton isActive={transactionType==='down'} onPress={()=>handleTransactionsTypeSelect('down')} type='down' title='Outcome'/>
       </TransactionTypes>
+
+      <CategorySelect title='Categoria'/>
      
           </Fields>
       
