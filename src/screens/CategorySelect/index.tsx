@@ -1,6 +1,8 @@
 import React from 'react'
-import { View, Text } from 'react-native'
-import { Container, Header, Title } from './styles'
+import { View, Text, FlatList } from 'react-native'
+import { categories } from '../../utils/categories'
+import { Container, Header, Title, Category, Icon, Name, Separator, Footer} from './styles'
+import Button from '../../Components/Forms/Button'
 
 interface Category{
     key:string;
@@ -20,6 +22,17 @@ export default function CategorySelect({category,setCategory,closeSelectCategory
             <Header>
                 <Title>Categoria</Title>
             </Header>
+            <FlatList data={categories} style={{flex:1, width:'100%'}} ItemSeparatorComponent={()=><Separator/>} keyExtractor={(item)=>item.key} renderItem={({item})=>(
+                <Category>
+                    <Icon name={item.icon}/>
+                    <Name>{item.name}</Name>
+                </Category>
+            )} />
+            <Footer>
+                <Button title='Selecionar'/>
+                    
+              
+            </Footer>
         </Container>
     )
 }
