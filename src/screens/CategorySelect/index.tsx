@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { Container } from './styles'
+import { Container, Header, Title } from './styles'
 
 interface Category{
     key:string;
@@ -17,7 +17,9 @@ interface Props{
 export default function CategorySelect({category,setCategory,closeSelectCategory}:Props) {
     return (
         <Container>
-            <Text></Text>
+            <Header>
+                <Title>Categoria</Title>
+            </Header>
         </Container>
     )
 }
