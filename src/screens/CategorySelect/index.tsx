@@ -29,7 +29,7 @@ export default function CategorySelect({category,setCategory,closeSelectCategory
                 </Category>
             )} />
             <Footer>
-                <Button title='Selecionar'/>
+                <Button onPress={closeSelectCategory} title='Selecionar'/>
                     
               
             </Footer>
