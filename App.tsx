@@ -8,6 +8,8 @@ import theme from './src/global/styles/theme';
 import {useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold} from '@expo-google-fonts/poppins'
 import AppLoading from 'expo-app-loading'
 import Register from './src/Components/Register';
+// import CategorySelect from './src/Components/Forms/CategorySelectButton';
+import CategorySelect from './src/screens/CategorySelect';
 
 export default function App() {
 
@@ -24,7 +26,8 @@ if(!fontsLoaded){
 <View style={styles.container}>
       {/* <Welcome title='Sup dude'/> */}
       {/* <Dashboard/> */}
-      <Register/>
+      {/* <Register/> */}
+      <CategorySelect/>n  
       <StatusBar style="auto" />
     </View>
     </ThemeProvider>

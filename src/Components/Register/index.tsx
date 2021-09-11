@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Modal } from "react-native";
 import Button from "../Forms/Button";
-import CategorySelect from "../Forms/CategorySelect";
+import CategorySelectButton from "../Forms/CategorySelectButton";
 import Input from "../Forms/Input";
 import TransactionTypeButton from "../Forms/TransactionTypeButton";
 import {Container,Header,Title,Form,Fields, TransactionTypes} from './styles'
+
+import CategorySelect from "../../screens/CategorySelect";
 
 export default function Register() {
 
@@ -28,12 +30,16 @@ export default function Register() {
       <TransactionTypeButton isActive={transactionType==='down'} onPress={()=>handleTransactionsTypeSelect('down')} type='down' title='Outcome'/>
       </TransactionTypes>
 
-      <CategorySelect title='Categoria'/>
+      <CategorySelectButton title='Categoria'/>
      
           </Fields>
       
       <Button title='enviar'/>
       </Form>
+
+      <Modal>
+        <CategorySelect/>
+      </Modal>
       
     </Container>
   );
