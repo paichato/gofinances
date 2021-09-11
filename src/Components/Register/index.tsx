@@ -24,7 +24,7 @@ export default function Register() {
     }
 
     const handleCloseModal=()=>{
-      console.log('me chamou');
+      // console.log('me chamou');
       
       setCategoryModalOpen(false);
     }
