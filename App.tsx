@@ -26,8 +26,8 @@ if(!fontsLoaded){
 <View style={styles.container}>
       {/* <Welcome title='Sup dude'/> */}
       {/* <Dashboard/> */}
-      {/* <Register/> */}
-      <CategorySelect/>n  
+      <Register/>
+      {/* <CategorySelect/> */}
       <StatusBar style="auto" />
     </View>
     </ThemeProvider>

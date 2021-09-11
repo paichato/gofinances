@@ -11,9 +11,24 @@ import CategorySelect from "../../screens/CategorySelect";
 export default function Register() {
 
     const [transactionType, setTransactionType] = useState('');
+    const [categoryModalOpen, setCategoryModalOpen] = useState(false);
+
+    const [category,setCategory]=useState({
+      key:'category',
+      name:'Categoria',
+   
+    })
 
     const handleTransactionsTypeSelect =(type:'up'|'down')=>{
         setTransactionType(type);
+    }
+
+    const handleCloseModal=()=>{
+      setCategoryModalOpen(!categoryModalOpen)
+    }
+    
+    const handleOpenModal=()=>{
+      setCategoryModalOpen(true);
     }
 
   return (
@@ -30,15 +45,15 @@ export default function Register() {
       <TransactionTypeButton isActive={transactionType==='down'} onPress={()=>handleTransactionsTypeSelect('down')} type='down' title='Outcome'/>
       </TransactionTypes>
 
-      <CategorySelectButton title='Categoria'/>
+      <CategorySelectButton onPress={handleOpenModal} title='Categoria'/>
      
           </Fields>
       
       <Button title='enviar'/>
       </Form>
 
-      <Modal>
-        <CategorySelect/>
+      <Modal visible={categoryModalOpen}>
+        <CategorySelect category={category} setCategory={setCategory} closeSelectCategory={handleCloseModal}/>
       </Modal>
       
     </Container>

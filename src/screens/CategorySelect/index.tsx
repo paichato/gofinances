@@ -10,8 +10,8 @@ interface Category{
 }
 
 interface Props{
-    category:string;
-    setCategory:(name:string)=>void;
+    category:Category;
+    setCategory:({}:Category)=>void;
     closeSelectCategory:()=>void;
 
 }

@@ -7,9 +7,9 @@ interface Props{
     title:string;
 }
 
-export default function CategorySelectButton({title}:Props) {
+export default function CategorySelectButton({title, ...rest}:Props) {
     return (
-        <Container>
+        <Container {...rest}>
             <Category>{title}</Category>
             <Icon name='chevron-down'/>
         </Container>
