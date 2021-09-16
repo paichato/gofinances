@@ -15,8 +15,8 @@ export default function InputForm({
 }:Props) {
     return (
         <Container>
-            <Controller control={control} render={({field:{onChange,onBlur, value}})=>(
-                <Input {...rest} />
+            <Controller control={control} render={({field:{onChange, value}})=>(
+                <Input onChangeText={onChange} value={value} {...rest} />
             )} name={name}  />
             
            
