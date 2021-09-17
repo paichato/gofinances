@@ -7,9 +7,20 @@ import TransactionTypeButton from "../Forms/TransactionTypeButton";
 import {Container,Header,Title,Form,Fields, TransactionTypes} from './styles'
 import InputForm from "../Forms/InputForm";
 import { useForm } from "react-hook-form";
-// import FormData from ''
+import * as Yup from 'yup';
+import {yupResolver} from '@hookform/resolvers/yup'
 
 import CategorySelect from "../../screens/CategorySelect";
+
+const schema =Yup.object().shape({
+  name: Yup.string().required('Nome é obrigatório'),
+  amount: Yup.number().typeError('Informe um valor Numerico').positive('o valor nao pode ser negativo')
+})
+
+interface FormData{
+  name:string;
+  amount:string;
+}
 
 export default function Register() {
 
@@ -24,7 +35,7 @@ export default function Register() {
    
     })
 
-    const {control,handleSubmit}=useForm();
+    const {control,handleSubmit,formState:{errors}}=useForm({resolver:yupResolver(schema)});
 
     const handleTransactionsTypeSelect =(type:'up'|'down')=>{
         setTransactionType(type);
@@ -67,8 +78,8 @@ export default function Register() {
       </Header>
       <Form>
           <Fields>
-          <InputForm control={control} name='name' placeholder='Nome' autoCapitalize='sentences' autoCorrect={false} />
-      <InputForm control={control} name='amount' placeholder='preço' keyboardType='numeric' />
+          <InputForm error={errors.name && errors.name.message} control={control} name='name' placeholder='Nome' autoCapitalize='sentences' autoCorrect={false} />
+      <InputForm error={errors.amount && errors.amount.message} control={control} name='amount' placeholder='preço' keyboardType='numeric' />
       <TransactionTypes>
       <TransactionTypeButton isActive={transactionType==='up'} onPress={()=>handleTransactionsTypeSelect('up')} type='up' title='Income'/>
       <TransactionTypeButton isActive={transactionType==='down'} onPress={()=>handleTransactionsTypeSelect('down')} type='down' title='Outcome'/>
@@ -78,7 +89,7 @@ export default function Register() {
      
           </Fields>
       
-      <Button onPress={()=>handleSubmit(handleRegister())} title='enviar'/>
+      <Button onPress={handleSubmit(handleRegister)} title='enviar'/>
       </Form>
 
       <Modal visible={categoryModalOpen}>
