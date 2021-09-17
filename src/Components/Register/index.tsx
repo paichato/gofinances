@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Modal } from "react-native";
+import { View, Text, Modal, TouchableWithoutFeedback, Keyboard, Alert, } from "react-native";
 import Button from "../Forms/Button";
 import CategorySelectButton from "../Forms/CategorySelectButton";
 import Input from "../Forms/Input";
@@ -42,6 +42,11 @@ export default function Register() {
 
     const handleRegister=(form:FormData)=>{
 
+      if(!transactionType)
+      return Alert.alert('Selecione o tipo da transacao');
+
+      if(category.key==='category') return Alert.alert('Selecione o tipo da transacao');
+
       const data={
         name:form.name,
         amount:form.amount,
@@ -54,14 +59,16 @@ export default function Register() {
     }
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <Container>
+      
       <Header>
         <Title>Cadastro</Title>
       </Header>
       <Form>
           <Fields>
-          <InputForm control={control} name='name' placeholder='Nome'/>
-      <InputForm control={control} name='amount' placeholder='preço'/>
+          <InputForm control={control} name='name' placeholder='Nome' autoCapitalize='sentences' autoCorrect={false} />
+      <InputForm control={control} name='amount' placeholder='preço' keyboardType='numeric' />
       <TransactionTypes>
       <TransactionTypeButton isActive={transactionType==='up'} onPress={()=>handleTransactionsTypeSelect('up')} type='up' title='Income'/>
       <TransactionTypeButton isActive={transactionType==='down'} onPress={()=>handleTransactionsTypeSelect('down')} type='down' title='Outcome'/>
@@ -71,13 +78,15 @@ export default function Register() {
      
           </Fields>
       
-      <Button onPress={handleSubmit(handleRegister)} title='enviar'/>
+      <Button onPress={()=>handleSubmit(handleRegister())} title='enviar'/>
       </Form>
 
       <Modal visible={categoryModalOpen}>
         <CategorySelect category={category} setCategory={setCategory} closeSelectCategory={handleCloseModal}/>
       </Modal>
       
+      
     </Container>
+    </TouchableWithoutFeedback>
   );
 }
