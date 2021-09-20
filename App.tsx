@@ -10,6 +10,9 @@ import AppLoading from 'expo-app-loading'
 import Register from './src/Components/Register';
 // import CategorySelect from './src/Components/Forms/CategorySelectButton';
 import CategorySelect from './src/screens/CategorySelect';
+import { NavigationContainer } from '@react-navigation/native';
+import {AppRoutes} from './src/routes/app.routes';
+
 
 export default function App() {
 
@@ -23,13 +26,10 @@ if(!fontsLoaded){
 
   return (
     <ThemeProvider theme={theme}>
-<View style={styles.container}>
-      {/* <Welcome title='Sup dude'/> */}
-      {/* <Dashboard/> */}
-      <Register/>
-      {/* <CategorySelect/> */}
-      <StatusBar style="auto" />
-    </View>
+      <NavigationContainer>
+
+    <AppRoutes/>
+    </NavigationContainer>
     </ThemeProvider>
     
   );
