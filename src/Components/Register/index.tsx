@@ -92,8 +92,8 @@ export default function Register() {
       <Button onPress={handleSubmit(handleRegister)} title='enviar'/>
       </Form>
 
-      <Modal visible={categoryModalOpen}>
-        <CategorySelect category={category} setCategory={setCategory} closeSelectCategory={handleCloseModal}/>
+      <Modal onRequestClose={()=>handleCloseModal()} visible={categoryModalOpen}>
+        <CategorySelect category={category} setCategory={setCategory} closeSelectCategory={()=>handleCloseModal()}/>
       </Modal>
       
       
