@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Modal, TouchableWithoutFeedback, Keyboard, Alert, } from "react-native";
 import Button from "../Forms/Button";
 import CategorySelectButton from "../Forms/CategorySelectButton";
@@ -9,7 +9,7 @@ import InputForm from "../Forms/InputForm";
 import { useForm } from "react-hook-form";
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup'
-import AsyncStorage from 'react-async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import CategorySelect from "../../screens/CategorySelect";
 
@@ -28,7 +28,8 @@ export default function Register() {
     const [transactionType, setTransactionType] = useState('');
     const [categoryModalOpen, setCategoryModalOpen] = useState(false);
     // const [name, setName] = useState('');
-    // const [amount, setAmount] = useState('');
+    // const [amount, setAmount] = useState('');'
+    const dataKey='@gofinances:transactions';
 
     const [category,setCategory]=useState({
       key:'category',
@@ -59,22 +60,38 @@ export default function Register() {
 
       if(category.key==='category') return Alert.alert('Selecione o tipo da transacao');
 
-      const data={
+      const newTransaction={
         name:form.name,
         amount:form.amount,
         transactionType,
         category:category.key
       }
 
-      console.log(data);
+      console.log(newTransaction);
       try{
-        const dataKey='@gofinances:transactions';
+
+        const data=await AsyncStorage.getItem(dataKey);
+        const currentData=data ? JSON.parse(data) : [];
+        
+        const formatedData={...currentData,newTransaction};
+
+        AsyncStorage.setItem(dataKey,JSON.stringify(formatedData));
       }catch(error){
         console.log(error);
         
       }
       
     }
+
+    useEffect(()=>{
+      const loadData =async()=>{
+       const data= await AsyncStorage.getItem(dataKey);
+       console.log(JSON.parse(data!));
+       
+      }
+
+      loadData();
+    },[])
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
