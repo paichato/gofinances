@@ -9,6 +9,7 @@ import InputForm from "../Forms/InputForm";
 import { useForm } from "react-hook-form";
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup'
+import AsyncStorage from 'react-async-storage';
 
 import CategorySelect from "../../screens/CategorySelect";
 
@@ -51,7 +52,7 @@ export default function Register() {
       setCategoryModalOpen(true);
     }
 
-    const handleRegister=(form:FormData)=>{
+    const handleRegister=async(form:FormData)=>{
 
       if(!transactionType)
       return Alert.alert('Selecione o tipo da transacao');
@@ -66,6 +67,12 @@ export default function Register() {
       }
 
       console.log(data);
+      try{
+        const dataKey='@gofinances:transactions';
+      }catch(error){
+        console.log(error);
+        
+      }
       
     }
 
