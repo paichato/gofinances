@@ -12,6 +12,7 @@ import {yupResolver} from '@hookform/resolvers/yup'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import uuid from 'react-native-uuid';
 
+
 import CategorySelect from "../../screens/CategorySelect";
 
 const schema =Yup.object().shape({
@@ -24,7 +25,7 @@ interface FormData{
   amount:string;
 }
 
-export default function Register() {
+export default function Register({navigation}) {
 
     const [transactionType, setTransactionType] = useState('');
     const [categoryModalOpen, setCategoryModalOpen] = useState(false);
@@ -38,7 +39,7 @@ export default function Register() {
    
     })
 
-    const {control,handleSubmit,formState:{errors}}=useForm({resolver:yupResolver(schema)});
+    const {control,handleSubmit,formState:{errors},reset}=useForm({resolver:yupResolver(schema)});
 
     const handleTransactionsTypeSelect =(type:'up'|'down')=>{
         setTransactionType(type);
@@ -70,7 +71,7 @@ export default function Register() {
         date: new Date()
       }
 
-      console.log(newTransaction);
+      // console.log(newTransaction);
       try{
 
         const data=await AsyncStorage.getItem(dataKey);
@@ -78,7 +79,18 @@ export default function Register() {
         
         const formatedData=[...currentData,newTransaction];
 
-        AsyncStorage.setItem(dataKey,JSON.stringify(formatedData));
+        await AsyncStorage.setItem(dataKey,JSON.stringify(formatedData));
+
+        reset();
+        setTransactionType('');
+        setCategory({
+          key:'category',
+          name:'Categoria'
+        });
+
+        navigation.navigate('Listagem');
+
+
       }catch(error){
         console.log(error);
         
@@ -94,6 +106,13 @@ export default function Register() {
       }
 
       loadData();
+
+      // const clearStorage=async()=>{
+      //   await AsyncStorage.removeItem(dataKey);
+      // }
+
+      // clearStorage();
+      
     },[])
 
   return (
