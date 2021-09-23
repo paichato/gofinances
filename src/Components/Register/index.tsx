@@ -73,7 +73,7 @@ export default function Register() {
         const data=await AsyncStorage.getItem(dataKey);
         const currentData=data ? JSON.parse(data) : [];
         
-        const formatedData={...currentData,newTransaction};
+        const formatedData=[...currentData,newTransaction];
 
         AsyncStorage.setItem(dataKey,JSON.stringify(formatedData));
       }catch(error){
