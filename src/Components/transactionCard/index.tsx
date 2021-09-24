@@ -10,7 +10,7 @@ interface Category{
 
 export interface TransactionCardProps{
     data:{
-        title:string,
+        name:string,
         amount: string,
     category:Category,
     date:string,
@@ -27,15 +27,15 @@ export default function TransactionCard({data}:TransactionCardProps) {
 
     return (
         <Container>
-            <Title>{data.title}</Title>
-            <Amount type={data.type} >{ data.type==='negative' && '-'} {data.amount} MT</Amount>
+            <Title>{data?.name}</Title>
+            <Amount type={data?.type} >{ data?.type==='negative' && '-'} {data?.amount} MT</Amount>
 
             <Footer>
                 <Category>
-                    <Icon name={data.category.icon} />
-                    <CategoryName>{data.category.name}</CategoryName>
+                    <Icon name={data?.category.icon} />
+                    <CategoryName>{data?.category.name}</CategoryName>
                 </Category>
-                <Date>{data.date}</Date>
+                <Date>{data?.date}</Date>
             </Footer>
         </Container>
     )

@@ -12,7 +12,8 @@ import Register from './src/Components/Register';
 import CategorySelect from './src/screens/CategorySelect';
 import { NavigationContainer } from '@react-navigation/native';
 import {AppRoutes} from './src/routes/app.routes';
-
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR';
 
 export default function App() {
 
