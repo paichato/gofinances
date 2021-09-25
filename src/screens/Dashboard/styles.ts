@@ -114,7 +114,7 @@ margin-bottom: 16px;
  export const EmptyField=styled.View`
  align-items: center;
  justify-content: center;
- 
+ margin-top:${RFPercentage(5)}%
  `
 
  export const EmptyFieldText=styled.Text<TextProps>`

@@ -32,9 +32,23 @@ export interface DataListProps extends TransactionCardProps{
     id:string;
 }
 
+interface HighlightProps{
+  total:string;
+}
+
+interface HiglightData{
+  entries:HighlightProps;
+  outcome:HighlightProps;
+
+}
+
 export default function Dashboard({navigation}) {
 
   const [data,setData]=useState<DataListProps[]>([]);
+  const [higlightData,setHighlightData]=useState<HiglightData>({} as HiglightData);
+
+  let entriesTotal=0;
+  let outcomeTotal=0 ;
 
   const loadTransactions=async()=>{
     const dataKey='@gofinances:transactions';
@@ -44,6 +58,14 @@ export default function Dashboard({navigation}) {
     
 
     const transactionsFormated:DataListProps[]=transactions.map((item:DataListProps)=>{
+
+
+      if(item.type==='positive'){
+        entriesTotal +=Number(item.amount)
+      }else{
+        outcomeTotal +=Number(item.amount)
+      }
+
       const amount=Number(item.amount).toLocaleString('pt-BR',{
         style:'currency',
         currency:'BRL'
@@ -67,12 +89,32 @@ export default function Dashboard({navigation}) {
     });
     
     setData(transactionsFormated);
+    setHighlightData({
+      entries:{
+        total:entriesTotal.toLocaleString('pt-BR',{
+          style:'currency',
+          currency:'BRL',
+
+          // currencyDisplay:'symbol'
+        })
+      },
+      outcome:{
+        total:outcomeTotal.toLocaleString('pt-BR',{
+          style:'currency',
+          currency:'BRL'
+        })
+      }
+    });
     console.log(data);
+    console.log(higlightData);
+    
 
   }
 
   useEffect(()=>{
     loadTransactions();
+    
+    
   },[])
 
   useFocusEffect(useCallback(()=>{
@@ -108,20 +150,23 @@ export default function Dashboard({navigation}) {
         </UserWrapper>
       </Header>
       <HighlightCards  >
-        <HighlightCard type='up' title='Entradas' amount='17.400,00 MT' lastTransaction='Ultima entrada dia 13 de abril'/>
-        <HighlightCard type='down' title='Entradas' amount='8.400,00 MT' lastTransaction='Ultima entrada dia 13 de Junho' />
+        <HighlightCard type='up' title='Entradas' amount={higlightData?.entries?.total} lastTransaction='Ultima entrada dia 13 de abril'/>
+        <HighlightCard type='down' title='Entradas' amount={higlightData?.outcome?.total} lastTransaction='Ultima entrada dia 13 de Junho' />
         <HighlightCard type='total' title='Entradas' amount='400,00 MT' lastTransaction='Ultima entrada dia 13 de Setembro' />
       </HighlightCards>
-    <Transactions>
-        <TitleTrans>Listagem</TitleTrans>
-        <EmptyField>
+      {data.length<1 ? <EmptyField>
           <EmptyFieldText>Sem nada a listar</EmptyFieldText>
           <EmptyFieldButton onPress={()=>navigation.navigate('Cadastrar')} ><EmptyFieldText type >Cadastrar uma transação</EmptyFieldText></EmptyFieldButton>
-        </EmptyField>
+        </EmptyField> :<>
+    <Transactions>
+        <TitleTrans>Listagem</TitleTrans>
+          
         <TransactionsList data={data} keyExtractor={item=>item.id}  renderItem={({item})=><TransactionCard data={item}/>} />
               {/* <TransactionCard data={data[0]} /> */}
 
     </Transactions>
+    </>
+    }
     </Container>
   );
 }
