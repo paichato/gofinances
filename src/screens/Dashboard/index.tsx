@@ -32,7 +32,7 @@ export interface DataListProps extends TransactionCardProps{
     id:string;
 }
 
-export default function Dashboard() {
+export default function Dashboard({navigation}) {
 
   const [data,setData]=useState<DataListProps[]>([]);
 
@@ -116,7 +116,7 @@ export default function Dashboard() {
         <TitleTrans>Listagem</TitleTrans>
         <EmptyField>
           <EmptyFieldText>Sem nada a listar</EmptyFieldText>
-          <EmptyFieldButton><EmptyFieldText type >Cadastrar uma transação</EmptyFieldText></EmptyFieldButton>
+          <EmptyFieldButton onPress={()=>navigation.navigate('Cadastrar')} ><EmptyFieldText type >Cadastrar uma transação</EmptyFieldText></EmptyFieldButton>
         </EmptyField>
         <TransactionsList data={data} keyExtractor={item=>item.id}  renderItem={({item})=><TransactionCard data={item}/>} />
               {/* <TransactionCard data={data[0]} /> */}
