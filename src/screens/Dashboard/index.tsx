@@ -33,13 +33,13 @@ export interface DataListProps extends TransactionCardProps{
 }
 
 interface HighlightProps{
-  total:string;
+  amount:string;
 }
 
 interface HiglightData{
   entries:HighlightProps;
   outcome:HighlightProps;
-
+  total:HighlightProps;
 }
 
 export default function Dashboard({navigation}) {
@@ -47,13 +47,13 @@ export default function Dashboard({navigation}) {
   const [data,setData]=useState<DataListProps[]>([]);
   const [higlightData,setHighlightData]=useState<HiglightData>({} as HiglightData);
 
-  let entriesTotal=0;
-  let outcomeTotal=0 ;
+  
 
   const loadTransactions=async()=>{
     const dataKey='@gofinances:transactions';
     const response= await AsyncStorage.getItem(dataKey);
-
+    let entriesTotal=0;
+    let outcomeTotal=0;
     const transactions = response ? JSON.parse(response) : [];
     
 
@@ -61,8 +61,8 @@ export default function Dashboard({navigation}) {
 
 
       if(item.type==='positive'){
-        entriesTotal +=Number(item.amount)
-      }else{
+        entriesTotal =Number(item.amount)+entriesTotal;
+      }else  {
         outcomeTotal +=Number(item.amount)
       }
 
@@ -89,9 +89,10 @@ export default function Dashboard({navigation}) {
     });
     
     setData(transactionsFormated);
+    const total=entriesTotal -outcomeTotal;
     setHighlightData({
       entries:{
-        total:entriesTotal.toLocaleString('pt-BR',{
+        amount:entriesTotal.toLocaleString('pt-BR',{
           style:'currency',
           currency:'BRL',
 
@@ -99,14 +100,21 @@ export default function Dashboard({navigation}) {
         })
       },
       outcome:{
-        total:outcomeTotal.toLocaleString('pt-BR',{
+        amount:outcomeTotal.toLocaleString('pt-BR',{
           style:'currency',
           currency:'BRL'
         })
-      }
+      },
+      total:{
+        amount:total.toLocaleString('pt-BR',{
+          style:'currency',
+          currency:'BRL'
+      }),
+    }
+        
     });
     console.log(data);
-    console.log(higlightData);
+    console.log(data.length);
     
 
   }
@@ -150,9 +158,9 @@ export default function Dashboard({navigation}) {
         </UserWrapper>
       </Header>
       <HighlightCards  >
-        <HighlightCard type='up' title='Entradas' amount={higlightData?.entries?.total} lastTransaction='Ultima entrada dia 13 de abril'/>
-        <HighlightCard type='down' title='Entradas' amount={higlightData?.outcome?.total} lastTransaction='Ultima entrada dia 13 de Junho' />
-        <HighlightCard type='total' title='Entradas' amount='400,00 MT' lastTransaction='Ultima entrada dia 13 de Setembro' />
+        <HighlightCard type='up' title='Entradas' amount={higlightData?.entries?.amount} lastTransaction='Ultima entrada dia 13 de abril'/>
+        <HighlightCard type='down' title='Saidas' amount={higlightData?.outcome?.amount} lastTransaction='Ultima entrada dia 13 de Junho' />
+        <HighlightCard type='total' title='Total' amount={higlightData?.total?.amount} lastTransaction='Ultima entrada dia 13 de Setembro' />
       </HighlightCards>
       {data.length<1 ? <EmptyField>
           <EmptyFieldText>Sem nada a listar</EmptyFieldText>
