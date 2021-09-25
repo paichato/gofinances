@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useCallback, useEffect, useState } from "react";
-import { View, Text, Platform } from "react-native";
+import { View, Text, Platform, Button, TouchableOpacity } from "react-native";
 import { getBottomSpace } from "react-native-iphone-x-helper";
 import HighlightCard from "../../Components/highlightCard";
 import TransactionCard, { TransactionCardProps } from "../../Components/transactionCard";
@@ -19,7 +19,10 @@ import {
   Transactions,
   TitleTrans,
   TransactionsList,
-  LogoutButton
+  LogoutButton,
+  EmptyField,
+  EmptyFieldText,
+  EmptyFieldButton
 
 } from "./styles";
 import {useFocusEffect} from "@react-navigation/native"
@@ -111,6 +114,10 @@ export default function Dashboard() {
       </HighlightCards>
     <Transactions>
         <TitleTrans>Listagem</TitleTrans>
+        <EmptyField>
+          <EmptyFieldText>Sem nada a listar</EmptyFieldText>
+          <EmptyFieldButton><EmptyFieldText type >Cadastrar uma transação</EmptyFieldText></EmptyFieldButton>
+        </EmptyField>
         <TransactionsList data={data} keyExtractor={item=>item.id}  renderItem={({item})=><TransactionCard data={item}/>} />
               {/* <TransactionCard data={data[0]} /> */}
 

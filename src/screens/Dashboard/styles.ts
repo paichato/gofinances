@@ -7,6 +7,10 @@ import { DataListProps } from ".";
 import { FlatList, Platform } from "react-native";
 import {BorderlessButton} from 'react-native-gesture-handler'
 
+interface TextProps{
+   type?:Boolean
+}
+
 export const Container=styled.View`
 flex:1;
 background-color: ${({theme})=>theme.colors.background};
@@ -105,4 +109,22 @@ margin-bottom: 16px;
  })`
 
  
+ `
+
+ export const EmptyField=styled.View`
+ align-items: center;
+ justify-content: center;
+ 
+ `
+
+ export const EmptyFieldText=styled.Text<TextProps>`
+ font-family:${({theme})=>theme.fonts.regular} ;
+color: ${({theme,type})=> type? theme.colors.shape : theme.colors.text_dark}
+ `
+
+ export const EmptyFieldButton=styled.TouchableOpacity`
+ 
+ background-color: ${({theme})=>theme.colors.primary};
+ padding:10px;
+ border-radius: 5px;
  `
