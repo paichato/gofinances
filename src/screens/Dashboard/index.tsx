@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { View, Text, Platform } from "react-native";
 import { getBottomSpace } from "react-native-iphone-x-helper";
 import HighlightCard from "../../Components/highlightCard";
@@ -22,6 +22,7 @@ import {
   LogoutButton
 
 } from "./styles";
+import {useFocusEffect} from "@react-navigation/native"
 
 
 export interface DataListProps extends TransactionCardProps{
@@ -70,6 +71,10 @@ export default function Dashboard() {
   useEffect(()=>{
     loadTransactions();
   },[])
+
+  useFocusEffect(useCallback(()=>{
+    loadTransactions();
+  },[]))
 
 //     const data:DataListProps[]=[
 //         {id:'1',data:{title:'Desenvolvimento de site', amount:'12.000,00', date:'13/04/2020',category:{name:'Vendas', icon:'dollar-sign'}, type:'positive'}},
