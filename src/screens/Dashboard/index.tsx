@@ -34,6 +34,7 @@ export interface DataListProps extends TransactionCardProps{
 
 interface HighlightProps{
   amount:string;
+  lastTransaction:string;
 }
 
 interface HiglightData{
@@ -105,6 +106,10 @@ export default function Dashboard({navigation}) {
     
     setData(transactionsFormated);
 
+  const lastTransactionEntries= getLastTransactionDate(transactions, 'positive');
+  const lastTransactionExpenses= getLastTransactionDate(transactions, 'negative');
+
+  console.log();
   
    
 
@@ -118,19 +123,22 @@ export default function Dashboard({navigation}) {
           currency:'BRL',
 
           // currencyDisplay:'symbol'
-        })
+        }),
+        lastTransaction: lastTransactionEntries,
       },
       outcome:{
         amount:outcomeTotal.toLocaleString('pt-BR',{
           style:'currency',
           currency:'BRL'
-        })
+        }),
+        lastTransaction: lastTransactionExpenses,
       },
       total:{
         amount:total.toLocaleString('pt-BR',{
           style:'currency',
           currency:'BRL'
       }),
+      lastTransaction:'',
     }
         
     });
