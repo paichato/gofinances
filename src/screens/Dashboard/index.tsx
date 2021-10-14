@@ -50,18 +50,18 @@ export default function Dashboard({navigation}) {
   // const theme=useTheme();
 
   const getLastTransactionDate=(collection:DataListProps[], type:'positive'|'negative')=>{
-    const lastTransactionsEntries=Math.max.apply(Math,collection
+    const lastTransaction=Math.max.apply(Math,collection
       .filter(transaction=>transaction.type===type)
       .map(transaction=>new Date(transaction.date).getTime()));
   
       // ultima transaction
-      console.log('ultima trans',new Date(lastTransactionsEntries));
+      console.log('ultima trans',new Date(lastTransaction));
   
-      const lastTransactionEntriesFormatted=Intl.DateTimeFormat('pt-BR',{
+      return Intl.DateTimeFormat('pt-BR',{
         day:'2-digit',
           month:'2-digit',
           year:'2-digit',
-        }).format(new Date(lastTransactionsEntries));
+        }).format(new Date(lastTransaction));
   }
 
   const loadTransactions=async()=>{
