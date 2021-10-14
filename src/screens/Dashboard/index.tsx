@@ -47,7 +47,22 @@ export default function Dashboard({navigation}) {
   const [data,setData]=useState<DataListProps[]>([]);
   const [higlightData,setHighlightData]=useState<HiglightData>({} as HiglightData);
 
+  // const theme=useTheme();
+
+  const getLastTransactionDate=(collection:DataListProps[], type:'positive'|'negative')=>{
+    const lastTransactionsEntries=Math.max.apply(Math,collection
+      .filter(transaction=>transaction.type===type)
+      .map(transaction=>new Date(transaction.date).getTime()));
   
+      // ultima transaction
+      console.log('ultima trans',new Date(lastTransactionsEntries));
+  
+      const lastTransactionEntriesFormatted=Intl.DateTimeFormat('pt-BR',{
+        day:'2-digit',
+          month:'2-digit',
+          year:'2-digit',
+        }).format(new Date(lastTransactionsEntries));
+  }
 
   const loadTransactions=async()=>{
     const dataKey='@gofinances:transactions';
@@ -89,7 +104,13 @@ export default function Dashboard({navigation}) {
     });
     
     setData(transactionsFormated);
+
+  
+   
+
     const total=entriesTotal -outcomeTotal;
+
+
     setHighlightData({
       entries:{
         amount:entriesTotal.toLocaleString('pt-BR',{

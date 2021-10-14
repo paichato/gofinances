@@ -10,13 +10,13 @@ interface Category{
 }
 
 export interface TransactionCardProps{
-    data:{
+    
         name:string,
         amount: string,
     category:Category,
     date:string,
     type:'positive' | 'negative'
-}
+
 
 }
 
