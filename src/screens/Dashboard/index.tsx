@@ -51,18 +51,19 @@ export default function Dashboard({navigation}) {
   // const theme=useTheme();
 
   const getLastTransactionDate=(collection:DataListProps[], type:'positive'|'negative')=>{
-    const lastTransaction=Math.max.apply(Math,collection
+    const lastTransaction=new Date(Math.max.apply(Math,collection
       .filter(transaction=>transaction.type===type)
-      .map(transaction=>new Date(transaction.date).getTime()));
+      .map(transaction=>new Date(transaction.date).getTime())));
   
       // ultima transaction
       console.log('ultima trans',new Date(lastTransaction));
   
-      return Intl.DateTimeFormat('pt-BR',{
-        day:'2-digit',
-          month:'2-digit',
-          year:'2-digit',
-        }).format(new Date(lastTransaction));
+      // return Intl.DateTimeFormat('pt-BR',{
+      //   day:'2-digit',
+      //     month:'2-digit',
+      //     year:'2-digit',
+      //   }).format(new Date(lastTransaction));
+      return `${lastTransaction.getDate()} de ${lastTransaction.toLocaleString('pt-BR',{month:'long'})}`;
   }
 
   const loadTransactions=async()=>{
@@ -124,14 +125,14 @@ export default function Dashboard({navigation}) {
 
           // currencyDisplay:'symbol'
         }),
-        lastTransaction: lastTransactionEntries,
+        lastTransaction: `Ultima entrada dia ${lastTransactionEntries}`,
       },
       outcome:{
         amount:outcomeTotal.toLocaleString('pt-BR',{
           style:'currency',
           currency:'BRL'
         }),
-        lastTransaction: lastTransactionExpenses,
+        lastTransaction: `Ultima saida dia ${lastTransactionExpenses}`,
       },
       total:{
         amount:total.toLocaleString('pt-BR',{
@@ -187,8 +188,8 @@ export default function Dashboard({navigation}) {
         </UserWrapper>
       </Header>
       <HighlightCards  >
-        <HighlightCard type='up' title='Entradas' amount={higlightData?.entries?.amount} lastTransaction='Ultima entrada dia 13 de abril'/>
-        <HighlightCard type='down' title='Saidas' amount={higlightData?.outcome?.amount} lastTransaction='Ultima entrada dia 13 de Junho' />
+        <HighlightCard type='up' title='Entradas' amount={higlightData?.entries?.amount} lastTransaction={higlightData?.entries?.lastTransaction}/>
+        <HighlightCard type='down' title='Saidas' amount={higlightData?.outcome?.amount} lastTransaction={higlightData?.outcome?.lastTransaction} />
         <HighlightCard type='total' title='Total' amount={higlightData?.total?.amount} lastTransaction='Ultima entrada dia 13 de Setembro' />
       </HighlightCards>
       {data.length<1 ? <EmptyField>
