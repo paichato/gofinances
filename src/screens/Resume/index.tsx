@@ -14,6 +14,7 @@ type:'positive' | 'negative'
 }
 
 interface CategoryData{
+    key:string;
     name: string;
     total:string;
     color:string;
@@ -48,6 +49,7 @@ export default function Resume() {
                         currency:'BRL'
                     })
                      totalByCategory.push({
+                    key:category.key,
                     name:category.name,
                     color:category.color,
                     total,
@@ -70,7 +72,7 @@ loadData();
                 <Title>Resumo por categoria</Title>
             </Header>
             <Content  >
-            {totalByCategories.map((item)=>( <HistoryCard color={item.color} title={item.name} amount={item.total}  />))}
+            {totalByCategories.map((item)=>( <HistoryCard key={item.key} color={item.color} title={item.name} amount={item.total}  />))}
 
             </Content>
         </Container>
