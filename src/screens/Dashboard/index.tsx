@@ -109,6 +109,8 @@ export default function Dashboard({navigation}) {
 
   const lastTransactionEntries= getLastTransactionDate(transactions, 'positive');
   const lastTransactionExpenses= getLastTransactionDate(transactions, 'negative');
+  const totalInterval= `01 a ${lastTransactionExpenses}`;
+
 
   console.log();
   
@@ -139,7 +141,7 @@ export default function Dashboard({navigation}) {
           style:'currency',
           currency:'BRL'
       }),
-      lastTransaction:'',
+      lastTransaction:totalInterval,
     }
         
     });
@@ -188,9 +190,9 @@ export default function Dashboard({navigation}) {
         </UserWrapper>
       </Header>
       <HighlightCards  >
-        <HighlightCard type='up' title='Entradas' amount={higlightData?.entries?.amount} lastTransaction={higlightData?.entries?.lastTransaction}/>
+        <HighlightCard type='up' title='Entradas' amount={higlightData?.entries?.amount | 'helo'} lastTransaction={higlightData?.entries?.lastTransaction}/>
         <HighlightCard type='down' title='Saidas' amount={higlightData?.outcome?.amount} lastTransaction={higlightData?.outcome?.lastTransaction} />
-        <HighlightCard type='total' title='Total' amount={higlightData?.total?.amount} lastTransaction='Ultima entrada dia 13 de Setembro' />
+        <HighlightCard type='total' title='Total' amount={higlightData?.total?.amount} lastTransaction={higlightData?.total?.lastTransaction} />
       </HighlightCards>
       {data.length<1 ? <EmptyField>
           <EmptyFieldText>Sem nada a listar</EmptyFieldText>
