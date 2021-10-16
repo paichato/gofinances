@@ -13,6 +13,11 @@ date:string,
 type:'positive' | 'negative'
 }
 
+interface CategoryData{
+    name: string;
+    total:string;
+}
+
 export default function Resume() {
 
     const loadData=async()=>{
@@ -35,9 +40,13 @@ export default function Resume() {
                     }
                 });
                 if(categorySum>0){
+                    const total=categorySum.toLocaleString('pt-BR',{
+                        style:'currency',
+                        currency:'BRL'
+                    })
                      totalByCategory.push({
                     name:category.name,
-                    total:categorySum
+                    total,
                 });
                 }
                
