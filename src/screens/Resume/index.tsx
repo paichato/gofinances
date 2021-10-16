@@ -67,7 +67,7 @@ loadData();
             <Header>
                 <Title>Resumo por categoria</Title>
             </Header>
-            <HistoryCard color='red' title='Compras' amount='R$ 150,50'  />
+           {totalByCategories.map((item)=>( <HistoryCard color='red' title={item.name} amount={item.total}  />))}
         </Container>
     )
 }
