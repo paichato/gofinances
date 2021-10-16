@@ -4,6 +4,14 @@ import { View, Text } from 'react-native'
 import HistoryCard from '../../Components/HistoryCard'
 import { Container, Header, Title } from './styles'
 
+interface TransactionData{
+    name:string,
+    amount: string,
+category:string,
+date:string,
+type:'positive' | 'negative'
+}
+
 export default function Resume() {
 
     const loadData=async()=>{
@@ -12,6 +20,7 @@ export default function Resume() {
             const responseFormated=response ? JSON.parse(response) : [];
 
             console.log(responseFormated);
+            const expenses=responseFormated.filter((expense:TransactionData)=>expense.type==='negative');
     }
 
     useEffect(()=>{
