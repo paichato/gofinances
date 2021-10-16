@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
 import HistoryCard from '../../Components/HistoryCard'
 import { categories } from '../../utils/categories';
-import { Container, Header, Title } from './styles'
+import { Container, Header, Title, Content } from './styles'
 
 interface TransactionData{
     name:string,
@@ -69,7 +69,10 @@ loadData();
             <Header>
                 <Title>Resumo por categoria</Title>
             </Header>
-           {totalByCategories.map((item)=>( <HistoryCard color={item.color} title={item.name} amount={item.total}  />))}
+            <Content  >
+            {totalByCategories.map((item)=>( <HistoryCard color={item.color} title={item.name} amount={item.total}  />))}
+
+            </Content>
         </Container>
     )
 }
