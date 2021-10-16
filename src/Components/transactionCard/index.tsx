@@ -19,12 +19,15 @@ export interface TransactionCardProps{
 
 
 }
+interface Props{
+    data:TransactionCardProps
+}
 
 
-export default function TransactionCard({data}:TransactionCardProps) {
+export default function TransactionCard({data}:Props) {
 
   
-const category=categories.filter((item)=>item.key==data.category)[0];
+const [category]=categories.filter((item)=>item.key===data.category);
 
     return (
         <Container>
