@@ -63,7 +63,12 @@ export default function Dashboard({navigation}) {
       //     month:'2-digit',
       //     year:'2-digit',
       //   }).format(new Date(lastTransaction));
-      return `${lastTransaction.getDate()} de ${lastTransaction.toLocaleString('pt-BR',{month:'long'})}`;
+      if(!lastTransaction.getDate()){
+        return ''
+      }else{
+        return `${lastTransaction.getDate()} de ${lastTransaction.toLocaleString('pt-BR',{month:'long'})}`;
+      }
+      
   }
 
   const loadTransactions=async()=>{
@@ -109,7 +114,7 @@ export default function Dashboard({navigation}) {
 
   const lastTransactionEntries= getLastTransactionDate(transactions, 'positive');
   const lastTransactionExpenses= getLastTransactionDate(transactions, 'negative');
-  const totalInterval= `01 a ${lastTransactionExpenses}`;
+  const totalInterval= !lastTransactionExpenses ? '' :  `01 a ${lastTransactionExpenses}`;
 
 
   console.log();
@@ -127,14 +132,14 @@ export default function Dashboard({navigation}) {
 
           // currencyDisplay:'symbol'
         }),
-        lastTransaction: `Ultima entrada dia ${lastTransactionEntries}`,
+        lastTransaction: !lastTransactionEntries? 'Sem ultima entrada' : `Ultima entrada dia ${lastTransactionEntries}`,
       },
       outcome:{
         amount:outcomeTotal.toLocaleString('pt-BR',{
           style:'currency',
           currency:'BRL'
         }),
-        lastTransaction: `Ultima saida dia ${lastTransactionExpenses}`,
+        lastTransaction: !lastTransactionExpenses? 'Sem ultima entrada' :`Ultima saida dia ${lastTransactionExpenses}`,
       },
       total:{
         amount:total.toLocaleString('pt-BR',{
@@ -190,7 +195,7 @@ export default function Dashboard({navigation}) {
         </UserWrapper>
       </Header>
       <HighlightCards  >
-        <HighlightCard type='up' title='Entradas' amount={higlightData?.entries?.amount | 'helo'} lastTransaction={higlightData?.entries?.lastTransaction}/>
+        <HighlightCard type='up' title='Entradas' amount={higlightData?.entries?.amount} lastTransaction={higlightData?.entries?.lastTransaction}/>
         <HighlightCard type='down' title='Saidas' amount={higlightData?.outcome?.amount} lastTransaction={higlightData?.outcome?.lastTransaction} />
         <HighlightCard type='total' title='Total' amount={higlightData?.total?.amount} lastTransaction={higlightData?.total?.lastTransaction} />
       </HighlightCards>
