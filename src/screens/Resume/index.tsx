@@ -1,10 +1,14 @@
 import React from 'react'
 import { View, Text } from 'react-native'
+import { Container, Header, Title } from './styles'
 
 export default function Resume() {
     return (
-        <View>
-            <Text></Text>
-        </View>
+        <Container>
+            <Header>
+                <Title>Resumo por categoria</Title>
+            </Header>
+
+        </Container>
     )
 }
