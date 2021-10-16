@@ -2,10 +2,17 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { Container } from './styles'
 
-export default function HistoryCard() {
+interface Props{
+    title:string;
+    amount: string;
+    color: string;
+}
+
+export default function HistoryCard({color,title,amount}:Props) {
     return (
-        <Container>
-            <Text></Text>
+        <Container color={color} >
+            <Title>{title}</Title>
+            <Amount>{amount}</Amount>
         </Container>
     )
 }
