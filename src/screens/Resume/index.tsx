@@ -16,6 +16,7 @@ type:'positive' | 'negative'
 interface CategoryData{
     name: string;
     total:string;
+    color:string;
 }
 
 export default function Resume() {
@@ -48,6 +49,7 @@ export default function Resume() {
                     })
                      totalByCategory.push({
                     name:category.name,
+                    color:category.color,
                     total,
                 });
                 }
@@ -67,7 +69,7 @@ loadData();
             <Header>
                 <Title>Resumo por categoria</Title>
             </Header>
-           {totalByCategories.map((item)=>( <HistoryCard color='red' title={item.name} amount={item.total}  />))}
+           {totalByCategories.map((item)=>( <HistoryCard color={item.color} title={item.name} amount={item.total}  />))}
         </Container>
     )
 }
