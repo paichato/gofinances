@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
 import HistoryCard from '../../Components/HistoryCard'
 import { categories } from '../../utils/categories';
@@ -20,6 +20,8 @@ interface CategoryData{
 
 export default function Resume() {
 
+    const [totalByCategories,setTotalByCategories]=useState<CategoryData[]>([]);
+
     const loadData=async()=>{
         const dataKey='@gofinances:transactions';
         const response=await AsyncStorage.getItem(dataKey);
@@ -28,7 +30,7 @@ export default function Resume() {
             console.log(responseFormated);
             const expenses=responseFormated.filter((expense:TransactionData)=>expense.type==='negative');
 
-            const totalByCategory=[];
+            const totalByCategory:CategoryData[]=[];
 
 
             categories.forEach(category=>{
@@ -52,7 +54,7 @@ export default function Resume() {
                
             });
 
-            console.log(totalByCategory);
+            setTotalByCategories(totalByCategory);
     }
 
     useEffect(()=>{
