@@ -88,7 +88,9 @@ loadData();
             </Header>
             <Content  > 
                 <ChartContainer>
-                  <VictoryPie data={totalByCategories} x='percent' y='total' />   
+                  <VictoryPie
+                  colorScale={totalByCategories.map(category=>category.color)}
+                  data={totalByCategories} x='percent' y='total' />   
                 </ChartContainer>
                 
             {totalByCategories.map((item)=>( <HistoryCard key={item.key} color={item.color} title={item.name} amount={item.totalFormatted}  />))}
