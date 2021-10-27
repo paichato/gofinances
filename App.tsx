@@ -28,7 +28,7 @@ if(!fontsLoaded){
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
-
+    <StatusBar barStyle="light-content" />
     <AppRoutes/>
     </NavigationContainer>
     </ThemeProvider>

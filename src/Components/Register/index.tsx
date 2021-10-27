@@ -17,7 +17,7 @@ import CategorySelect from "../../screens/CategorySelect";
 
 const schema =Yup.object().shape({
   name: Yup.string().required('Nome é obrigatório'),
-  amount: Yup.number().typeError('Informe um valor Numerico').positive('o valor nao pode ser negativo')
+  amount: Yup.number().typeError('Informe um valor Numerico').positive('o valor nao pode ser negativo').required('valor é obrigatório'),
 })
 
 interface FormData{
