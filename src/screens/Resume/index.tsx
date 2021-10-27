@@ -5,6 +5,7 @@ import HistoryCard from '../../Components/HistoryCard'
 import { categories } from '../../utils/categories';
 import { Container, Header, Title, Content, ChartContainer } from './styles'
 import {VictoryPie} from 'victory-native'
+import { RFValue } from 'react-native-responsive-fontsize';
 
 interface TransactionData{
     name:string,
@@ -90,6 +91,14 @@ loadData();
                 <ChartContainer>
                   <VictoryPie
                   colorScale={totalByCategories.map(category=>category.color)}
+                  style={{
+                      labels:{
+                        fontSize:RFValue(18),
+                        fontWeight:'bold',
+
+                        }
+                    }}
+                    labelRadius={50}
                   data={totalByCategories} x='percent' y='total' />   
                 </ChartContainer>
                 
