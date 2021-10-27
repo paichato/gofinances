@@ -7,6 +7,7 @@ import { Container, Header, Title, Content, ChartContainer } from './styles'
 import {VictoryPie} from 'victory-native'
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useTheme } from 'styled-components';
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs' 
 
 interface TransactionData{
     name:string,
@@ -89,7 +90,9 @@ loadData();
             <Header>
                 <Title>Resumo por categoria</Title>
             </Header>
-            <Content  > 
+            <Content
+            contentContainerStyle={{paddingBottom:useBottomTabBarHeight()}} 
+            showsVerticalScrollIndicator={false} > 
                 <ChartContainer>
                   <VictoryPie
                   colorScale={totalByCategories.map(category=>category.color)}
