@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, FlatList } from 'react-native'
 import { categories } from '../../utils/categories'
-import { Container, Header, Title, Category, Icon, Name, Separator, Footer} from './styles'
+import { Container, Header, Title, Category, Icon, Name, Separator, Footer, CategoryInput, RemoveIcon, AddIcon, Touchable} from './styles'
 import Button from '../../Components/Forms/Button'
 
 export interface Category{
@@ -25,7 +25,15 @@ export default function CategorySelect({category,setCategory,closeSelectCategory
     return (
         <Container>
             <Header>
+                <Touchable>
+                <RemoveIcon name='sticker-remove-outline'/>    
+                </Touchable>
+                
                 <Title>Categoria</Title>
+                <Touchable>
+                <AddIcon name='add-circle-outline'  />
+                </Touchable>
+                
             </Header>
             <FlatList data={categories} style={{flex:1, width:'100%'}} ItemSeparatorComponent={()=><Separator/>} keyExtractor={(item)=>item.key} renderItem={({item})=>(
                 <Category isActive={category.key===item.key} onPress={()=>handleCategorySelect(item)}>
@@ -33,6 +41,7 @@ export default function CategorySelect({category,setCategory,closeSelectCategory
                     <Name>{item.name}</Name>
                 </Category>
             )} />
+            
             <Footer>
                 <Button onPress={closeSelectCategory} title='Selecionar'/>
                     

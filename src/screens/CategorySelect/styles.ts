@@ -4,6 +4,9 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import styled from "styled-components/native";
 import {TouchableOpacity, TouchableOpacityProps} from 'react-native'
 // import {Category as CategoryProps} from '../CategorySelect/index'
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons';
+import {BorderlessButton} from 'react-native-gesture-handler'
 
 interface CategoryProps{
 isActive:boolean;
@@ -20,9 +23,10 @@ width: 100%;
 height: ${RFValue(113)}px;
 background-color: ${({theme})=>theme.colors.primary};
 align-items:center;
-justify-content: flex-end;
+justify-content: space-around;
 padding-bottom: 19px;
-
+flex-direction: row;
+align-items: flex-end;
 `
 
 export const Title=styled.Text`
@@ -60,6 +64,24 @@ width:100%;
 padding:24px;
 `
 
+export const CategoryInput=styled.TextInput`
+width: 100%;
+
+
+`
+
+export const RemoveIcon=styled(MaterialCommunityIcons)`
+font-size: ${RFValue(28)}px;
+color: ${({theme})=>theme.colors.shape};
+`
+export const AddIcon=styled(MaterialIcons)`
+font-size: ${RFValue(28)}px;
+color: ${({theme})=>theme.colors.shape};
+`
+
+export const Touchable=styled.TouchableOpacity`
+
+`
 // export const Button=styled.TouchableOpacity`
 // width:100%;
 // background-color: ${({theme})=>theme.colors.secondary};
