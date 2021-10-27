@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
 import HistoryCard from '../../Components/HistoryCard'
 import { categories } from '../../utils/categories';
-import { Container, Header, Title, Content } from './styles'
+import { Container, Header, Title, Content, ChartContainer } from './styles'
 import {VictoryPie} from 'victory-native'
 
 interface TransactionData{
@@ -75,7 +75,10 @@ loadData();
                 <Title>Resumo por categoria</Title>
             </Header>
             <Content  > 
-                <VictoryPie data={totalByCategories} x='name' y='total' /> 
+                <ChartContainer>
+                  <VictoryPie data={totalByCategories} x='name' y='total' />   
+                </ChartContainer>
+                
             {totalByCategories.map((item)=>( <HistoryCard key={item.key} color={item.color} title={item.name} amount={item.totalFormatted}  />))}
 
             </Content>
