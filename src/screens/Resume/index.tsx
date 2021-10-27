@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { View, Text, ActivityIndicator } from 'react-native'
 import HistoryCard from '../../Components/HistoryCard'
 import { categories } from '../../utils/categories';
@@ -10,6 +10,7 @@ import { useTheme } from 'styled-components';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs' 
 import {addMonths,subMonths,format} from 'date-fns'
 import {ptBR} from 'date-fns/locale'
+import { useFocusEffect } from '@react-navigation/core';
 
 
 interface TransactionData{
@@ -107,6 +108,10 @@ export default function Resume() {
     useEffect(()=>{
 loadData();
     },[selectedDate])
+
+    useFocusEffect(useCallback(()=>{
+        loadData();
+      },[]))
     
 
     return (
