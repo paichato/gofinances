@@ -1,9 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, ActivityIndicator } from 'react-native'
 import HistoryCard from '../../Components/HistoryCard'
 import { categories } from '../../utils/categories';
-import { Container, Header, Title, Content, ChartContainer, MonthSelectButton,MonthSelect,SelectIcon,Month } from './styles'
+import { Container, Header, Title, Content, ChartContainer, MonthSelectButton,MonthSelect,SelectIcon,Month,LoadContainer } from './styles'
 import {VictoryPie} from 'victory-native'
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useTheme } from 'styled-components';
@@ -31,6 +31,7 @@ interface CategoryData{
 
 export default function Resume() {
 
+    const [isLoading,setIsLoading]=useState(true);
     const [selectedDate,setSelectedDate]=useState(new Date);
     const [totalByCategories,setTotalByCategories]=useState<CategoryData[]>([]);
     const theme=useTheme();
@@ -99,6 +100,7 @@ export default function Resume() {
             });
 
             setTotalByCategories(totalByCategory);
+            setIsLoading(false);
     }
 
     useEffect(()=>{
@@ -108,12 +110,15 @@ loadData();
 
     return (
         <Container>
+            
             <Header>
                 <Title>Resumo por categoria</Title>
             </Header>
+            {isLoading ? <LoadContainer><ActivityIndicator color={theme.colors.primary} size='large' /></LoadContainer>:<>
             <Content
             contentContainerStyle={{paddingBottom:useBottomTabBarHeight(),paddingHorizontal:24}} 
             showsVerticalScrollIndicator={false} > 
+
             <MonthSelect>
                 <MonthSelectButton onPress={()=>handleDateChange('prev')} >
                     <SelectIcon name='chevron-left'/>
@@ -140,6 +145,8 @@ loadData();
             {totalByCategories.map((item)=>( <HistoryCard key={item.key} color={item.color} title={item.name} amount={item.totalFormatted}  />))}
 
             </Content>
+</>
+}
         </Container>
     )
 }
