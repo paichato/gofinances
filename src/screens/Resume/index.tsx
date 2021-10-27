@@ -34,6 +34,13 @@ export default function Resume() {
             console.log(responseFormated);
             const expenses=responseFormated.filter((expense:TransactionData)=>expense.type==='negative');
 
+            const expensesTotal=expenses.reduce((accumulator:number,expense:TransactionData) =>{
+                return accumulator+Number(expense.amount)
+            },0);
+
+            console.log('xpTotal:',expensesTotal);
+            
+
             const totalByCategory:CategoryData[]=[];
 
 
