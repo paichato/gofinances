@@ -4,6 +4,7 @@ import { View, Text } from 'react-native'
 import HistoryCard from '../../Components/HistoryCard'
 import { categories } from '../../utils/categories';
 import { Container, Header, Title, Content } from './styles'
+import {VictoryPie} from 'victory-native'
 
 interface TransactionData{
     name:string,
@@ -16,7 +17,8 @@ type:'positive' | 'negative'
 interface CategoryData{
     key:string;
     name: string;
-    total:string;
+    total:Number;
+    totalFormatted:string;
     color:string;
 }
 
@@ -44,7 +46,7 @@ export default function Resume() {
                     }
                 });
                 if(categorySum>0){
-                    const total=categorySum.toLocaleString('pt-BR',{
+                    const totalFormatted=categorySum.toLocaleString('pt-BR',{
                         style:'currency',
                         currency:'BRL'
                     })
@@ -52,7 +54,8 @@ export default function Resume() {
                     key:category.key,
                     name:category.name,
                     color:category.color,
-                    total,
+                    total:categorySum,
+                    totalFormatted,
                 });
                 }
                
@@ -72,7 +75,8 @@ loadData();
                 <Title>Resumo por categoria</Title>
             </Header>
             <Content  > 
-            {totalByCategories.map((item)=>( <HistoryCard key={item.key} color={item.color} title={item.name} amount={item.total}  />))}
+                <VictoryPie data={totalByCategories} x='name' y='total' /> 
+            {totalByCategories.map((item)=>( <HistoryCard key={item.key} color={item.color} title={item.name} amount={item.totalFormatted}  />))}
 
             </Content>
         </Container>
