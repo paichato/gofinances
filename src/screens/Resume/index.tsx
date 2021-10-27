@@ -8,6 +8,8 @@ import {VictoryPie} from 'victory-native'
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useTheme } from 'styled-components';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs' 
+import {addMonths,subMonths,format} from 'date-fns'
+import {ptBR} from 'date-fns/locale'
 
 interface TransactionData{
     name:string,
@@ -28,8 +30,21 @@ interface CategoryData{
 
 export default function Resume() {
 
+    const [selectedDate,setSelectedDate]=useState(new Date);
     const [totalByCategories,setTotalByCategories]=useState<CategoryData[]>([]);
     const theme=useTheme();
+
+    const handleDateChange=(action:'next'|'prev')=>{
+        if(action==='next'){
+            setSelectedDate(addMonths(selectedDate,1));
+            
+            
+            
+        }else{
+            setSelectedDate(subMonths(selectedDate,1));
+            
+        }
+    }
 
     const loadData=async()=>{
         const dataKey='@gofinances:transactions';
@@ -94,11 +109,11 @@ loadData();
             contentContainerStyle={{paddingBottom:useBottomTabBarHeight(),paddingHorizontal:24}} 
             showsVerticalScrollIndicator={false} > 
             <MonthSelect>
-                <MonthSelectButton>
+                <MonthSelectButton onPress={()=>handleDateChange('prev')} >
                     <SelectIcon name='chevron-left'/>
                 </MonthSelectButton>
-                <Month>Outubro</Month>
-                <MonthSelectButton>
+                <Month>{format(selectedDate,'MMMM, yyyy',{locale:ptBR})}</Month>
+                <MonthSelectButton onPress={()=>handleDateChange('next')} >
                     <SelectIcon name='chevron-right' />
                 </MonthSelectButton>
             </MonthSelect>
