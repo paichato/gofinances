@@ -54,14 +54,20 @@ align-items: center;
 `
 
 export const Month=styled.Text`
-
+font-family: ${({theme})=>theme.fonts.regular};
+font-size: ${RFValue(20)}px;
 `
 export const MonthSelect=styled.View`
-
+width:100%;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+margin-top: 24px;
 `
 export const MonthSelectButton=styled(BorderlessButton)`
 
 `
 export const SelectIcon=styled(Feather)`
 
+font-size: ${RFValue(24)}px;
 `
