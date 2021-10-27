@@ -6,6 +6,7 @@ import { categories } from '../../utils/categories';
 import { Container, Header, Title, Content, ChartContainer } from './styles'
 import {VictoryPie} from 'victory-native'
 import { RFValue } from 'react-native-responsive-fontsize';
+import { useTheme } from 'styled-components';
 
 interface TransactionData{
     name:string,
@@ -27,6 +28,7 @@ interface CategoryData{
 export default function Resume() {
 
     const [totalByCategories,setTotalByCategories]=useState<CategoryData[]>([]);
+    const theme=useTheme();
 
     const loadData=async()=>{
         const dataKey='@gofinances:transactions';
@@ -95,7 +97,7 @@ loadData();
                       labels:{
                         fontSize:RFValue(18),
                         fontWeight:'bold',
-
+                        fill:theme.colors.shape
                         }
                     }}
                     labelRadius={50}
