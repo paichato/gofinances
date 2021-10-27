@@ -11,6 +11,7 @@ import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs'
 import {addMonths,subMonths,format} from 'date-fns'
 import {ptBR} from 'date-fns/locale'
 
+
 interface TransactionData{
     name:string,
     amount: string,
@@ -52,7 +53,12 @@ export default function Resume() {
             const responseFormated=response ? JSON.parse(response) : [];
 
             console.log(responseFormated);
-            const expenses=responseFormated.filter((expense:TransactionData)=>expense.type==='negative');
+            const expenses=responseFormated.filter((expense:TransactionData)=>
+            expense.type==='negative' && 
+            new Date(expense.date).getMonth()===selectedDate.getMonth() &&
+            new Date(expense.date).getFullYear()===selectedDate.getFullYear()
+            
+            );
 
             const expensesTotal=expenses.reduce((accumulator:number,expense:TransactionData) =>{
                 return accumulator+Number(expense.amount)
@@ -97,7 +103,7 @@ export default function Resume() {
 
     useEffect(()=>{
 loadData();
-    },[])
+    },[selectedDate])
     
 
     return (
