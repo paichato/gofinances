@@ -1,5 +1,7 @@
+import { BorderlessButton } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
 import styled from "styled-components/native";
+import {Feather} from '@expo/vector-icons'
 
 export const Container=styled.View`
 flex:1;
@@ -49,4 +51,17 @@ export const Content=styled.ScrollView`
 export const ChartContainer=styled.View`
 width:100%;
 align-items: center;
+`
+
+export const Month=styled.Text`
+
+`
+export const MonthSelect=styled.View`
+
+`
+export const MonthSelectButton=styled(BorderlessButton)`
+
+`
+export const SelectIcon=styled(Feather)`
+
 `

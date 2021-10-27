@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
 import HistoryCard from '../../Components/HistoryCard'
 import { categories } from '../../utils/categories';
-import { Container, Header, Title, Content, ChartContainer } from './styles'
+import { Container, Header, Title, Content, ChartContainer, MonthSelectButton,MonthSelect,SelectIcon,Month } from './styles'
 import {VictoryPie} from 'victory-native'
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useTheme } from 'styled-components';
@@ -91,8 +91,17 @@ loadData();
                 <Title>Resumo por categoria</Title>
             </Header>
             <Content
-            contentContainerStyle={{paddingBottom:useBottomTabBarHeight()}} 
+            contentContainerStyle={{paddingBottom:useBottomTabBarHeight(),paddingHorizontal:24}} 
             showsVerticalScrollIndicator={false} > 
+            <MonthSelect>
+                <MonthSelectButton>
+                    <SelectIcon name='chevron-left'/>
+                </MonthSelectButton>
+                <Month>Outubro</Month>
+                <MonthSelectButton>
+                    <SelectIcon name='chevron-right' />
+                </MonthSelectButton>
+            </MonthSelect>
                 <ChartContainer>
                   <VictoryPie
                   colorScale={totalByCategories.map(category=>category.color)}
