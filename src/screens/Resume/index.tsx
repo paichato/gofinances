@@ -20,6 +20,7 @@ interface CategoryData{
     total:Number;
     totalFormatted:string;
     color:string;
+    percent:string;
 }
 
 export default function Resume() {
@@ -57,12 +58,16 @@ export default function Resume() {
                         style:'currency',
                         currency:'BRL'
                     })
+
+                    const percent=`${(categorySum/expensesTotal*100).toFixed(0)}%`
+
                      totalByCategory.push({
                     key:category.key,
                     name:category.name,
                     color:category.color,
                     total:categorySum,
                     totalFormatted,
+                    percent,
                 });
                 }
                
@@ -83,7 +88,7 @@ loadData();
             </Header>
             <Content  > 
                 <ChartContainer>
-                  <VictoryPie data={totalByCategories} x='name' y='total' />   
+                  <VictoryPie data={totalByCategories} x='percent' y='total' />   
                 </ChartContainer>
                 
             {totalByCategories.map((item)=>( <HistoryCard key={item.key} color={item.color} title={item.name} amount={item.totalFormatted}  />))}
