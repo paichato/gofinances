@@ -1,7 +1,9 @@
 import { BorderlessButton } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
 import styled from "styled-components/native";
-import {Feather} from '@expo/vector-icons'
+import {Feather} from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons'; 
+import theme from '../../global/styles/theme';
 
 export const Container=styled.View`
 flex:1;
@@ -76,4 +78,20 @@ export const LoadContainer=styled.View`
 flex:1;
 justify-content:center;
 align-items:center;
+`
+
+export const EmptyContainer=styled.View`
+width:100%;
+height: 100%;
+align-items: center;
+justify-content: center;
+`
+export const ErrorIcon=styled(MaterialIcons)`
+font-size: ${RFValue(40)}px;
+color:${({theme})=>theme.colors.text};
+`
+
+export const Warning=styled.Text`
+color:${({theme})=>theme.colors.text};
+font-size: ${RFValue(15)}px;
 `

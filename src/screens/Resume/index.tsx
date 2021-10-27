@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { View, Text, ActivityIndicator } from 'react-native'
 import HistoryCard from '../../Components/HistoryCard'
 import { categories } from '../../utils/categories';
-import { Container, Header, Title, Content, ChartContainer, MonthSelectButton,MonthSelect,SelectIcon,Month,LoadContainer } from './styles'
+import { Container, Header, Title, Content, ChartContainer, MonthSelectButton,MonthSelect,SelectIcon,Month,LoadContainer, EmptyContainer, ErrorIcon, Warning } from './styles'
 import {VictoryPie} from 'victory-native'
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useTheme } from 'styled-components';
@@ -32,13 +32,14 @@ interface CategoryData{
 
 export default function Resume() {
 
-    const [isLoading,setIsLoading]=useState(true);
+    const [isLoading,setIsLoading]=useState(false);
     const [selectedDate,setSelectedDate]=useState(new Date);
     const [totalByCategories,setTotalByCategories]=useState<CategoryData[]>([]);
+    const [isEmpty,setIsEmpty]=useState(false);
     const theme=useTheme();
 
     const handleDateChange=(action:'next'|'prev')=>{
-        setIsLoading(true);
+        // setIsLoading(true);
         if(action==='next'){
             setSelectedDate(addMonths(selectedDate,1));
             
@@ -51,11 +52,14 @@ export default function Resume() {
     }
 
     const loadData=async()=>{
+        setIsLoading(true);
         const dataKey='@gofinances:transactions';
         const response=await AsyncStorage.getItem(dataKey);
             const responseFormated=response ? JSON.parse(response) : [];
+            
 
-            console.log(responseFormated);
+
+            
             const expenses=responseFormated.filter((expense:TransactionData)=>
             expense.type==='negative' && 
             new Date(expense.date).getMonth()===selectedDate.getMonth() &&
@@ -105,13 +109,13 @@ export default function Resume() {
             setIsLoading(false);
     }
 
-    useEffect(()=>{
-loadData();
-    },[selectedDate])
+//     useEffect(()=>{
+// loadData();
+//     },[selectedDate])
 
     useFocusEffect(useCallback(()=>{
         loadData();
-      },[]))
+      },[selectedDate]))
     
 
     return (
@@ -120,6 +124,7 @@ loadData();
             <Header>
                 <Title>Resumo por categoria</Title>
             </Header>
+            
             {isLoading ? <LoadContainer><ActivityIndicator color={theme.colors.primary} size='large' /></LoadContainer>:<>
             <Content
             contentContainerStyle={{paddingBottom:useBottomTabBarHeight(),paddingHorizontal:24}} 
@@ -134,6 +139,7 @@ loadData();
                     <SelectIcon name='chevron-right' />
                 </MonthSelectButton>
             </MonthSelect>
+            {totalByCategories==false && <EmptyContainer><ErrorIcon name='error-outline'/><Warning>Sem dados por exibir para este mes</Warning></EmptyContainer>}
                 <ChartContainer>
                   <VictoryPie
                   colorScale={totalByCategories.map(category=>category.color)}
@@ -144,9 +150,10 @@ loadData();
                         fill:theme.colors.shape
                         }
                     }}
-                    labelRadius={50}
+                    labelRadius={90}
                   data={totalByCategories} x='percent' y='total' />   
                 </ChartContainer>
+                
                 
             {totalByCategories.map((item)=>( <HistoryCard key={item.key} color={item.color} title={item.name} amount={item.totalFormatted}  />))}
 
