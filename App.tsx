@@ -14,6 +14,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import {AppRoutes} from './src/routes/app.routes';
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
+import Signin from './src/screens/Signin'
 
 export default function App() {
 
@@ -28,8 +29,9 @@ if(!fontsLoaded){
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
-    <StatusBar barStyle="light-content" />
-    <AppRoutes/>
+    <StatusBar barStyle="light" />
+    <Signin/>
+    {/* <AppRoutes/> */}
     </NavigationContainer>
     </ThemeProvider>
     
