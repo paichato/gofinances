@@ -15,6 +15,7 @@ import {AppRoutes} from './src/routes/app.routes';
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
 import Signin from './src/screens/Signin'
+import AuthProvider from './src/AuthContetx';
 
 export default function App() {
 
@@ -30,7 +31,10 @@ if(!fontsLoaded){
     <ThemeProvider theme={theme}>
       <NavigationContainer>
     <StatusBar barStyle="light" />
-    <Signin/>
+    <AuthProvider>
+      <Signin/>
+    </AuthProvider>
+    
     {/* <AppRoutes/> */}
     </NavigationContainer>
     </ThemeProvider>
