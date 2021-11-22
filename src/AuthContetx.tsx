@@ -26,6 +26,10 @@ interface AuthorizationResponse{
     type:string;
 }
 
+interface ErrorType{
+    error:()=>Error;
+}
+
 const AuthContext=createContext({} as IAuthContextData);
 
 export default function AuthProvider({children}:AuthProviderProps){
@@ -55,7 +59,7 @@ export default function AuthProvider({children}:AuthProviderProps){
             }
            
            
-        } catch (error) {
+        } catch (error : any) {
             throw new Error(error);
         }
     }
