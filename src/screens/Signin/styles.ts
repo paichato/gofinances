@@ -46,3 +46,20 @@ padding:0 32px;
 justify-content: space-between;
 
 `
+
+export const ErrorBarContainer=styled.View`
+background-color: ${({theme})=>theme.colors.attention};
+position:absolute;
+height: ${RFValue(100)}px;
+width: 100%;
+top:0;
+elevation:10;
+align-items: center;
+justify-content: flex-end;
+`
+
+export const ErrorBarMessage=styled.Text`
+color: ${({theme})=>theme.colors.shape};
+margin-bottom: 5px;
+height: 50%;
+`

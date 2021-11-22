@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, Alert } from 'react-native'
-import { Container, Header,TitleWrapper,Title,Footer,SigninTitle, FooterWrapper } from './styles'
+import { Container, Header,TitleWrapper,Title,Footer,SigninTitle, FooterWrapper, ErrorBarContainer, ErrorBarMessage } from './styles'
 import AppleLogo from '../../assets/apple.svg'
 import GoogleLogo from '../../assets/google.svg'
 import Logo from '../../assets/fin.svg'
@@ -12,13 +12,17 @@ import { useAuthContext } from '../../AuthContetx'
 export default function Signin() {
 
     const {signInWithGoogle}=useAuthContext();
+    const [errorMessage,setErrorMessage]=useState('');
 
     const handleSignInWithGoogle=async()=>{
         try {
             await signInWithGoogle();
-        } catch (error) {
+        } catch (error:any) {
             console.log(error);
-            Alert.alert('Nao foi possivel conectar a conta Google')
+            // console.log(error.code);
+            Alert.alert('Nao foi possivel conectar a conta Google');
+            setErrorMessage(String(error.message));
+
             
         }
     }
@@ -43,6 +47,11 @@ uma das contas abaixo</SigninTitle>
                 <SignInSocialButton title="Entrar com Apple" svg={AppleLogo}/>
             </FooterWrapper>
             </Footer>
+            {errorMessage!=='' && <ErrorBarContainer>
+                <ErrorBarMessage>
+                    {errorMessage}
+                </ErrorBarMessage>
+            </ErrorBarContainer>}
         </Container>
     )
 }
