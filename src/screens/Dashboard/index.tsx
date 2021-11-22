@@ -26,6 +26,7 @@ import {
 
 } from "./styles";
 import {useFocusEffect} from "@react-navigation/native"
+import keys from "../../utils/keys";
 
 
 export interface DataListProps extends TransactionCardProps{
@@ -73,7 +74,7 @@ export default function Dashboard({navigation}) {
 
   const loadTransactions=async()=>{
     const dataKey='@gofinances:transactions';
-    const response= await AsyncStorage.getItem(dataKey);
+    const response= await AsyncStorage.getItem(keys.storage.dataKey);
     let entriesTotal=0;
     let outcomeTotal=0;
     const transactions = response ? JSON.parse(response) : [];

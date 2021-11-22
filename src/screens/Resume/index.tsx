@@ -11,6 +11,7 @@ import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs'
 import {addMonths,subMonths,format} from 'date-fns'
 import {ptBR} from 'date-fns/locale'
 import { useFocusEffect } from '@react-navigation/core';
+import keys from '../../utils/keys';
 
 
 interface TransactionData{
@@ -54,7 +55,7 @@ export default function Resume() {
     const loadData=async()=>{
         setIsLoading(true);
         const dataKey='@gofinances:transactions';
-        const response=await AsyncStorage.getItem(dataKey);
+        const response=await AsyncStorage.getItem(keys.storage.dataKey);
             const responseFormated=response ? JSON.parse(response) : [];
             
 

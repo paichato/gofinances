@@ -3,9 +3,12 @@ import { View, Text, StyleSheet } from 'react-native'
 import theme from '../../global/styles/theme'
 import { ConfirmButton, ErrorIcon, ErrorText, ModalContainer, ModalDescription, ModalTitle } from './styles'
 
+export interface AccountProps{
+    account:'Google' | 'Apple';
+}
 
 interface ModalProps{
-    account:'Google' | 'Apple';
+    account: AccountProps["account"];
     // state:({}:Boolean)=>void;
     state:Dispatch<SetStateAction<boolean>>
     

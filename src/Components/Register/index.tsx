@@ -14,6 +14,7 @@ import uuid from 'react-native-uuid';
 
 
 import CategorySelect from "../../screens/CategorySelect";
+import keys from "../../utils/keys";
 
 const schema =Yup.object().shape({
   name: Yup.string().required('Nome é obrigatório'),
@@ -74,12 +75,12 @@ export default function Register({navigation}) {
       // console.log(newTransaction);
       try{
 
-        const data=await AsyncStorage.getItem(dataKey);
+        const data=await AsyncStorage.getItem(keys.storage.dataKey);
         const currentData=data ? JSON.parse(data) : [];
         
         const formatedData=[...currentData,newTransaction];
 
-        await AsyncStorage.setItem(dataKey,JSON.stringify(formatedData));
+        await AsyncStorage.setItem(keys.storage.dataKey,JSON.stringify(formatedData));
 
         reset();
         setTransactionType('');
@@ -100,7 +101,7 @@ export default function Register({navigation}) {
 
     useEffect(()=>{
       const loadData =async()=>{
-       const data= await AsyncStorage.getItem(dataKey);
+       const data= await AsyncStorage.getItem(keys.storage.dataKey);
        console.log(JSON.parse(data!));
        
       }
