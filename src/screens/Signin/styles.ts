@@ -1,6 +1,8 @@
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
+import theme from "../../global/styles/theme";
 // import theme from "../../global/styles/theme";
+import { MaterialIcons } from '@expo/vector-icons'; 
 
 
 export const Container=styled.View`
@@ -63,3 +65,4 @@ color: ${({theme})=>theme.colors.shape};
 margin-bottom: 5px;
 height: 50%;
 `
+

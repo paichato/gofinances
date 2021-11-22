@@ -1,18 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, Alert } from 'react-native'
-import { Container, Header,TitleWrapper,Title,Footer,SigninTitle, FooterWrapper, ErrorBarContainer, ErrorBarMessage } from './styles'
+import { Container, Header,TitleWrapper,Title,Footer,SigninTitle, FooterWrapper, ErrorBarContainer, ErrorBarMessage, ModalContainer, ModalTitle } from './styles'
 import AppleLogo from '../../assets/apple.svg'
 import GoogleLogo from '../../assets/google.svg'
 import Logo from '../../assets/fin.svg'
 import { RFValue } from 'react-native-responsive-fontsize'
 import SignInSocialButton from '../../Components/SignInSocialButton'
 import { useAuthContext } from '../../AuthContetx'
+import GoModal from '../../Components/Modal'
 
 
 export default function Signin() {
 
     const {signInWithGoogle}=useAuthContext();
-    const [errorMessage,setErrorMessage]=useState('');
+    const [errorMessage,setErrorMessage]=useState('ada');
+    const [modalVisible,setModalVisible]=useState(false);
 
     const handleSignInWithGoogle=async()=>{
         try {
@@ -22,10 +24,17 @@ export default function Signin() {
             // console.log(error.code);
             Alert.alert('Nao foi possivel conectar a conta Google');
             setErrorMessage(String(error.message));
+            setModalVisible(true);
 
             
         }
     }
+
+    useEffect(()=>{
+        setTimeout(() => {
+            setErrorMessage('');
+        }, 10000);
+    },[errorMessage])
 
     return (
         <Container>
@@ -44,7 +53,7 @@ uma das contas abaixo</SigninTitle>
             <Footer>
             <FooterWrapper>
                 <SignInSocialButton onPress={()=>handleSignInWithGoogle()} title="Entrar com Google" svg={GoogleLogo}/>
-                <SignInSocialButton title="Entrar com Apple" svg={AppleLogo}/>
+                <SignInSocialButton onPress={()=>setModalVisible(true)} title="Entrar com Apple" svg={AppleLogo}/>
             </FooterWrapper>
             </Footer>
             {errorMessage!=='' && <ErrorBarContainer>
@@ -52,6 +61,7 @@ uma das contas abaixo</SigninTitle>
                     {errorMessage}
                 </ErrorBarMessage>
             </ErrorBarContainer>}
+            { modalVisible && <GoModal state={setModalVisible} account='Google'/>}
         </Container>
     )
 }
