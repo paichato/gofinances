@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useContext, useState } from 'react';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 const {CLIENT_ID}=process.env;
 const {REDIRECT_URL}=process.env;
 import * as AuthSession from 'expo-auth-session'
@@ -39,6 +39,7 @@ const AuthContext=createContext({} as IAuthContextData);
 export default function AuthProvider({children}:AuthProviderProps){
 
     const [user,setUser]=useState<User>({}as User);
+    const [userStorageLoading,setUserStorageLoading]=useState(true);
     // console.log(CLIENT_ID);
     
 
@@ -116,6 +117,20 @@ export default function AuthProvider({children}:AuthProviderProps){
             throw new Error(error);
         }
     }
+
+    useEffect(()=>{
+        async function loadUserStorageData(){
+            const userStoraged=await AsyncStorage.getItem(keys.storage.user);
+
+            if(userStoraged){
+                const userLoged=JSON.parse(userStoraged) as User;
+                setUser(userLoged);
+            }
+            setUserStorageLoading(false);
+        }
+
+        loadUserStorageData();
+    },[])
 
     return <AuthContext.Provider value={{user,signInWithGoogle, signInWithApple}}>
         {children}
