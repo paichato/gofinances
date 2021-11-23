@@ -2,7 +2,9 @@ import React, { createContext, ReactNode, useContext, useState } from 'react';
 const {CLIENT_ID}=process.env;
 const {REDIRECT_URL}=process.env;
 import * as AuthSession from 'expo-auth-session'
-import { log } from 'react-native-reanimated';
+import * as AppleAuthentication from 'expo-apple-authentication';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import keys from './utils/keys';
 
 interface AuthProviderProps{
     children:ReactNode
@@ -11,6 +13,7 @@ interface AuthProviderProps{
 interface IAuthContextData{
     user:User;
     signInWithGoogle():Promise<void>;
+    signInWithApple():Promise<void>;
 }
 
 interface User{
@@ -56,12 +59,16 @@ export default function AuthProvider({children}:AuthProviderProps){
                 if(response.status===200){
                      const userInfo=await response.json();
                 console.log(userInfo);
-                setUser({
-                    id: userInfo.id,
+                const userLoged={
+                    id: String(userInfo.id),
                     name: userInfo.given_name,
                     email: userInfo.email,
                     photo: userInfo?.picture,
-                })
+                }
+                setUser(userLoged);
+
+                await AsyncStorage.setItem(keys.storage.user,JSON.stringify(userLoged));
+                
                 }else{
                     // console.log(JSON.stringify(response,0,2));
                     const errorResponse=await response.json()
@@ -80,14 +87,44 @@ export default function AuthProvider({children}:AuthProviderProps){
         }
     }
 
-    return <AuthContext.Provider value={{user,signInWithGoogle}}>
+    const signInWithApple=async()=>{
+        try {
+            const credential=await AppleAuthentication.signInAsync({
+                requestedScopes:[
+                    AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+                    AppleAuthentication.AppleAuthenticationScope.EMAIL,
+                ]
+            });
+
+            if(credential){
+                console.log(credential);
+                
+                const userLoged={
+                    id: String(credential.user),
+                    name: credential.fullName!.givenName!,
+                    email: credential.email!,
+                    photo: undefined,
+                };
+                 setUser(userLoged);
+
+            await AsyncStorage.setItem(keys.storage.user,JSON.stringify(userLoged));
+            }
+
+            
+
+        } catch (error:any) {
+            throw new Error(error);
+        }
+    }
+
+    return <AuthContext.Provider value={{user,signInWithGoogle, signInWithApple}}>
         {children}
     </AuthContext.Provider>
 }
 
 export const useAuthContext=()=>{
     const context=useContext(AuthContext);
-    const {user,signInWithGoogle}=context;
-    return {user,signInWithGoogle}
+    const {user,signInWithGoogle,signInWithApple}=context;
+    return {user,signInWithGoogle,signInWithApple}
     // return context;
 }

@@ -15,7 +15,7 @@ import {AppRoutes} from './src/routes/app.routes';
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
 import Signin from './src/screens/Signin'
-import AuthProvider from './src/AuthContetx';
+import AuthProvider from './src/AuthContext';
 
 export default function App() {
 

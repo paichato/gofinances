@@ -6,15 +6,16 @@ import GoogleLogo from '../../assets/google.svg'
 import Logo from '../../assets/fin.svg'
 import { RFValue } from 'react-native-responsive-fontsize'
 import SignInSocialButton from '../../Components/SignInSocialButton'
-import { useAuthContext } from '../../AuthContetx'
+
 import GoModal, { AccountProps } from '../../Components/Modal'
+import { useAuthContext } from '../../AuthContext'
 
 
 
 export default function Signin() {
 
     const {signInWithGoogle,signInWithApple}=useAuthContext();
-    const [errorMessage,setErrorMessage]=useState('ada');
+    const [errorMessage,setErrorMessage]=useState('');
     const [modalVisible,setModalVisible]=useState(false);
     const [acc,setAcc]=useState<AccountProps>();
 
