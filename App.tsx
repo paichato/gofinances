@@ -11,7 +11,7 @@ import Register from './src/Components/Register';
 // import CategorySelect from './src/Components/Forms/CategorySelectButton';
 import CategorySelect from './src/screens/CategorySelect';
 import { NavigationContainer } from '@react-navigation/native';
-import {AppRoutes} from './src/routes/app.routes';
+import Routes from './src/routes';
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
 import Signin from './src/screens/Signin'
@@ -29,14 +29,14 @@ if(!fontsLoaded){
 
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer>
+     
     <StatusBar barStyle="light" />
     <AuthProvider>
-      <Signin/>
+      <Routes/>
     </AuthProvider>
     
     {/* <AppRoutes/> */}
-    </NavigationContainer>
+   
     </ThemeProvider>
     
   );
