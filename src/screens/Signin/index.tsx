@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Alert } from 'react-native'
+import { View, Text, Alert, ActivityIndicator } from 'react-native'
 import { Container, Header,TitleWrapper,Title,Footer,SigninTitle, FooterWrapper, ErrorBarContainer, ErrorBarMessage} from './styles'
 import AppleLogo from '../../assets/apple.svg'
 import GoogleLogo from '../../assets/google.svg'
@@ -9,6 +9,7 @@ import SignInSocialButton from '../../Components/SignInSocialButton'
 
 import GoModal, { AccountProps } from '../../Components/Modal'
 import { useAuthContext } from '../../AuthContext'
+import theme from '../../global/styles/theme'
 
 
 
@@ -18,11 +19,13 @@ export default function Signin() {
     const [errorMessage,setErrorMessage]=useState('');
     const [modalVisible,setModalVisible]=useState(false);
     const [acc,setAcc]=useState<AccountProps>();
+    const [isLoading,setIsLoading]=useState(false);
 
     const handleSignInWithGoogle=async()=>{
         setErrorMessage('');
         setAcc('Google');
         try {
+            setIsLoading(true);
             await signInWithGoogle();
         } catch (error:any) {
             console.log(error);
@@ -32,6 +35,8 @@ export default function Signin() {
             setModalVisible(true);
 
             
+        } finally{
+            setIsLoading(false);
         }
     }
 
@@ -39,6 +44,7 @@ export default function Signin() {
         setErrorMessage('');
         setAcc('Apple');
         try {
+            setIsLoading(true);
             await signInWithApple();
         } catch (error:any) {
             console.log(error);
@@ -48,6 +54,8 @@ export default function Signin() {
             setModalVisible(true);
 
             
+        } finally{
+            setIsLoading(false);
         }
     }
 
@@ -76,6 +84,7 @@ uma das contas abaixo</SigninTitle>
                 <SignInSocialButton onPress={handleSignInWithGoogle} title="Entrar com Google" svg={GoogleLogo}/>
                 <SignInSocialButton onPress={handleSignInWithApple} title="Entrar com Apple" svg={AppleLogo}/>
             </FooterWrapper>
+            {isLoading && <ActivityIndicator color="white" size="large" />}
             </Footer>
             {errorMessage!=='' && <ErrorBarContainer>
                 <ErrorBarMessage>
@@ -83,6 +92,8 @@ uma das contas abaixo</SigninTitle>
                 </ErrorBarMessage>
             </ErrorBarContainer>}
             { modalVisible && <GoModal state={setModalVisible} account={acc}/>}
+            
+            
         </Container>
     )
 }
