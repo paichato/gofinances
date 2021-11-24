@@ -15,22 +15,23 @@ import Routes from './src/routes';
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
 import Signin from './src/screens/Signin'
-import AuthProvider from './src/AuthContext';
+import AuthProvider, { useAuthContext } from './src/AuthContext';
 
 export default function App() {
 
 const [fontsLoaded]=useFonts({
   Poppins_400Regular,Poppins_500Medium,Poppins_700Bold
 })
+const {userStorageLoading}=useAuthContext();
 
-if(!fontsLoaded){
+if(!fontsLoaded || userStorageLoading ){
   return <AppLoading/>
 }
 
   return (
     <ThemeProvider theme={theme}>
      
-    <StatusBar barStyle="light" />
+    <StatusBar style='light'  />
     <AuthProvider>
       <Routes/>
     </AuthProvider>

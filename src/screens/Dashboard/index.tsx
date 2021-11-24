@@ -27,6 +27,8 @@ import {
 } from "./styles";
 import {useFocusEffect} from "@react-navigation/native"
 import keys from "../../utils/keys";
+import { useAuthContext } from "../../AuthContext";
+import GoModal from "../../Components/Modal";
 
 
 export interface DataListProps extends TransactionCardProps{
@@ -48,6 +50,8 @@ export default function Dashboard({navigation}) {
 
   const [data,setData]=useState<DataListProps[]>([]);
   const [higlightData,setHighlightData]=useState<HiglightData>({} as HiglightData);
+  const {signOut}=useAuthContext();
+  const [modalVisible,setModalVisible]=useState(false);
 
   // const theme=useTheme();
 
@@ -157,6 +161,10 @@ export default function Dashboard({navigation}) {
 
   }
 
+  const handleSignOut=async()=>{
+    setModalVisible(true);
+  }
+
   useEffect(()=>{
     loadTransactions();
     
@@ -164,7 +172,9 @@ export default function Dashboard({navigation}) {
   },[])
 
   useFocusEffect(useCallback(()=>{
+    setModalVisible(false);
     loadTransactions();
+
   },[]))
 
 //     const data:DataListProps[]=[
@@ -188,7 +198,7 @@ export default function Dashboard({navigation}) {
               <Username>Marlon</Username>
             </User>
           </UserInfo>
-          <LogoutButton onPress={()=>{}} >
+          <LogoutButton onPress={handleSignOut} >
           <Icon name="power" />
           </LogoutButton>
 
@@ -213,6 +223,7 @@ export default function Dashboard({navigation}) {
     </Transactions>
     </>
     }
+    {modalVisible && <GoModal state={setModalVisible} action={signOut} txt='Deseja terminar a sessão?' txt2='Os seus dados nao serao gravados' />}
     </Container>
   );
 }

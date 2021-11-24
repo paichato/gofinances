@@ -43,8 +43,21 @@ align-items: center;
 justify-content:center;
 `
 
+export const CancelButton=styled.TouchableOpacity`
+background-color: ${({theme})=>theme.colors.attention};
+width: 100%;
+height: 20%;
+border-radius: 5px;
+align-items: center;
+justify-content:center;
+`
+
 export const ErrorText=styled.Text`
 color: ${({theme})=>theme.colors.shape};
 font-family: ${({theme})=>theme.fonts.bold};
 font-size: ${RFValue(15)}px;
+`
+
+export const Spacer=styled.View`
+height:10px;
 `

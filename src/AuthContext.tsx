@@ -15,6 +15,7 @@ interface IAuthContextData{
     signInWithGoogle():Promise<void>;
     signInWithApple():Promise<void>;
     signOut():Promise<void>;
+    userStorageLoading:boolean;
 }
 
 interface User{
@@ -139,14 +140,14 @@ export default function AuthProvider({children}:AuthProviderProps){
         loadUserStorageData();
     },[])
 
-    return <AuthContext.Provider value={{user,signInWithGoogle, signInWithApple, signOut}}>
+    return <AuthContext.Provider value={{user,signInWithGoogle, signInWithApple, signOut,userStorageLoading}}>
         {children}
     </AuthContext.Provider>
 }
 
 export const useAuthContext=()=>{
     const context=useContext(AuthContext);
-    const {user,signInWithGoogle,signInWithApple,signOut}=context;
-    return {user,signInWithGoogle,signInWithApple,signOut}
+    const {user,signInWithGoogle,signInWithApple,signOut,userStorageLoading}=context;
+    return {user,signInWithGoogle,signInWithApple,signOut,userStorageLoading}
     // return context;
 }
