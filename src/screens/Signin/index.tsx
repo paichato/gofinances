@@ -76,7 +76,8 @@ finanças de forma{'\n'}
 muito simples
                     </Title>
                 </TitleWrapper>
-                <SigninTitle>Faça seu login com{'\n'}
+                <SigninTitle>
+                    Faça seu login com{'\n'}
 uma das contas abaixo</SigninTitle>
             </Header>
             <Footer>

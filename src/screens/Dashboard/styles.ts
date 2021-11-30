@@ -5,7 +5,7 @@ import {Feather} from '@expo/vector-icons'
 import {getStatusBarHeight} from 'react-native-iphone-x-helper'
 import { DataListProps } from ".";
 import { FlatList, Platform } from "react-native";
-import {BorderlessButton} from 'react-native-gesture-handler'
+import {BorderlessButton, TouchableOpacity} from 'react-native-gesture-handler'
 
 interface TextProps{
    type?:Boolean
@@ -67,7 +67,7 @@ font-size: ${RFValue(18)}px;
 font-family: ${({theme})=>theme.fonts.bold};
  `
 
- export const LogoutButton=styled(BorderlessButton)`
+ export const LogoutButton=styled(TouchableOpacity)`
  
  `
 

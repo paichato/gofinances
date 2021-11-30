@@ -161,7 +161,7 @@ export default function Dashboard({navigation}) {
 
   }
 
-  const handleSignOut=async()=>{
+  const handleSignOut=()=>{
     setModalVisible(true);
   }
 
@@ -223,7 +223,11 @@ export default function Dashboard({navigation}) {
     </Transactions>
     </>
     }
-    {modalVisible && <GoModal state={setModalVisible} action={signOut} txt='Deseja terminar a sessão?' txt2='Os seus dados nao serao gravados' />}
+    {
+    modalVisible
+     &&
+      <GoModal state={setModalVisible} action={signOut} txt='Deseja terminar a sessão?' txt2='Os seus dados nao serao gravados' />
+      }
     </Container>
   );
 }
