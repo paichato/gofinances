@@ -50,7 +50,7 @@ export default function Dashboard({navigation}) {
 
   const [data,setData]=useState<DataListProps[]>([]);
   const [higlightData,setHighlightData]=useState<HiglightData>({} as HiglightData);
-  const {signOut}=useAuthContext();
+  const {signOut, user}=useAuthContext();
   const [modalVisible,setModalVisible]=useState(false);
 
   // const theme=useTheme();
@@ -194,8 +194,8 @@ export default function Dashboard({navigation}) {
               }}
             />
             <User>
-              <UserGreeting>Ola</UserGreeting>
-              <Username>Marlon</Username>
+              <UserGreeting>Olá</UserGreeting>
+              <Username>{user.name}</Username>
             </User>
           </UserInfo>
           <LogoutButton onPress={handleSignOut} >

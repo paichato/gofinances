@@ -26,7 +26,7 @@ export default function Signin() {
         setAcc('Google');
         try {
             setIsLoading(true);
-            await signInWithGoogle();
+           return await signInWithGoogle();
         } catch (error:any) {
             console.log(error);
             // console.log(error.code);
@@ -45,7 +45,7 @@ export default function Signin() {
         setAcc('Apple');
         try {
             setIsLoading(true);
-            await signInWithApple();
+           return await signInWithApple();
         } catch (error:any) {
             console.log(error);
             // console.log(error.code);
