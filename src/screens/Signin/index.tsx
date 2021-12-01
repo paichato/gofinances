@@ -33,11 +33,9 @@ export default function Signin() {
             // Alert.alert('Nao foi possivel conectar a conta Google');
             setErrorMessage(String(error.message));
             setModalVisible(true);
-
-            
-        } finally{
             setIsLoading(false);
         }
+        
     }
 
     const handleSignInWithApple=async()=>{
@@ -52,11 +50,9 @@ export default function Signin() {
             // Alert.alert('Nao foi possivel conectar a conta Google');
             setErrorMessage(String(error.message));
             setModalVisible(true);
-
-            
-        } finally{
             setIsLoading(false);
         }
+       
     }
 
     useEffect(()=>{
