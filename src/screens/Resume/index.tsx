@@ -12,6 +12,7 @@ import {addMonths,subMonths,format} from 'date-fns'
 import {ptBR} from 'date-fns/locale'
 import { useFocusEffect } from '@react-navigation/core';
 import keys from '../../utils/keys';
+import { useAuthContext } from '../../AuthContext';
 
 
 interface TransactionData{
@@ -38,6 +39,7 @@ export default function Resume() {
     const [totalByCategories,setTotalByCategories]=useState<CategoryData[]>([]);
     const [isEmpty,setIsEmpty]=useState(false);
     const theme=useTheme();
+    const {user}=useAuthContext();
 
     const handleDateChange=(action:'next'|'prev')=>{
         // setIsLoading(true);
@@ -55,7 +57,7 @@ export default function Resume() {
     const loadData=async()=>{
         setIsLoading(true);
         const dataKey='@gofinances:transactions';
-        const response=await AsyncStorage.getItem(keys.storage.dataKey);
+        const response=await AsyncStorage.getItem(keys.storage.dataKey+user.id);
             const responseFormated=response ? JSON.parse(response) : [];
             
 

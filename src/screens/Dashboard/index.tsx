@@ -79,8 +79,8 @@ export default function Dashboard({navigation}) {
   }
 
   const loadTransactions=async()=>{
-    const dataKey='@gofinances:transactions';
-    const response= await AsyncStorage.getItem(keys.storage.dataKey);
+    // const dataKey='@gofinances:transactions';
+    const response= await AsyncStorage.getItem(keys.storage.dataKey+user.id);
     let entriesTotal=0;
     let outcomeTotal=0;
     const transactions = response ? JSON.parse(response) : [];

@@ -15,6 +15,7 @@ import uuid from 'react-native-uuid';
 
 import CategorySelect from "../../screens/CategorySelect";
 import keys from "../../utils/keys";
+import { useAuthContext } from "../../AuthContext";
 
 const schema =Yup.object().shape({
   name: Yup.string().required('Nome é obrigatório'),
@@ -30,6 +31,7 @@ export default function Register({navigation}) {
 
     const [transactionType, setTransactionType] = useState('');
     const [categoryModalOpen, setCategoryModalOpen] = useState(false);
+    const {user}=useAuthContext();
     // const [name, setName] = useState('');
     // const [amount, setAmount] = useState('');'
     const dataKey='@gofinances:transactions';
@@ -75,12 +77,12 @@ export default function Register({navigation}) {
       // console.log(newTransaction);
       try{
 
-        const data=await AsyncStorage.getItem(keys.storage.dataKey);
+        const data=await AsyncStorage.getItem(keys.storage.dataKey+user.id);
         const currentData=data ? JSON.parse(data) : [];
         
         const formatedData=[...currentData,newTransaction];
 
-        await AsyncStorage.setItem(keys.storage.dataKey,JSON.stringify(formatedData));
+        await AsyncStorage.setItem(keys.storage.dataKey+user.id,JSON.stringify(formatedData));
 
         reset();
         setTransactionType('');
