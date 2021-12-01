@@ -22,7 +22,9 @@ import {
   LogoutButton,
   EmptyField,
   EmptyFieldText,
-  EmptyFieldButton
+  EmptyFieldButton,
+  MonogramContainer,
+  MonogramText
 
 } from "./styles";
 import {useFocusEffect} from "@react-navigation/native"
@@ -188,11 +190,17 @@ export default function Dashboard({navigation}) {
       <Header>
         <UserWrapper>
           <UserInfo>
-            <Photo
+            {
+            user.photo ? <Photo
               source={{
-                uri: "https://avatars.githubusercontent.com/u/65548563?v=4",
+                uri: user.photo
               }}
-            />
+            /> : 
+            <MonogramContainer>
+              <MonogramText>
+              {user.name.charAt(0)}
+              </MonogramText>
+              </MonogramContainer>}
             <User>
               <UserGreeting>Olá</UserGreeting>
               <Username>{user.name}</Username>

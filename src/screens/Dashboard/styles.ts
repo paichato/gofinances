@@ -52,6 +52,20 @@ width: ${RFValue(48)}px;
 height: ${RFValue(48)}px;
 border-radius: 10px;
  `
+
+export const MonogramContainer=styled.View`
+width: ${RFValue(48)}px;
+height: ${RFValue(48)}px;
+border-radius: 10px;
+align-items: center;
+justify-content: center;
+background-color:${({theme})=>theme.colors.secondary};
+
+`
+export const MonogramText=styled.Text`
+color: ${({theme})=>theme.colors.shape};
+`
+
 export const User=styled.View`
 margin-left: 17px;
  `
