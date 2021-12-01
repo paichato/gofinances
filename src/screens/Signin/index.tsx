@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Alert, ActivityIndicator } from 'react-native'
+import { View, Text, Alert, ActivityIndicator, Platform } from 'react-native'
 import { Container, Header,TitleWrapper,Title,Footer,SigninTitle, FooterWrapper, ErrorBarContainer, ErrorBarMessage} from './styles'
 import AppleLogo from '../../assets/apple.svg'
 import GoogleLogo from '../../assets/google.svg'
@@ -79,7 +79,9 @@ uma das contas abaixo</SigninTitle>
             <Footer>
             <FooterWrapper>
                 <SignInSocialButton onPress={handleSignInWithGoogle} title="Entrar com Google" svg={GoogleLogo}/>
-                <SignInSocialButton onPress={handleSignInWithApple} title="Entrar com Apple" svg={AppleLogo}/>
+                {
+                    Platform.OS === 'ios' &&
+                    <SignInSocialButton onPress={handleSignInWithApple} title="Entrar com Apple" svg={AppleLogo}/>}
             </FooterWrapper>
             {isLoading && <ActivityIndicator color="white" size="large" />}
             </Footer>
