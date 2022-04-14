@@ -4,7 +4,8 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "web": "expo start --web",
-    "start": "react-native start"
+    "start": "react-native start",
+    "test": "jest"
   },
   "dependencies": {
     "@expo-google-fonts/poppins": "^0.2.0",
@@ -27,6 +28,7 @@
     "expo-status-bar": "~1.0.4",
     "expo-updates": "~0.8.1",
     "intl": "^1.2.5",
+    "jest": "^27.5.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-hook-form": "^7.15.3",
@@ -61,6 +63,11 @@
     "preset": "jest-expo",
     "setupFilesAfterEnv": [
       "@testing-library/jest-native/extend-expect"
+    ],
+    "testPathIgnorePatterns": [
+      "./node_modules",
+      "./android",
+      "./ios"
     ]
   },
   "private": true,

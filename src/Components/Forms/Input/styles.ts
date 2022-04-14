@@ -20,6 +20,5 @@ export const Container = styled(TextInput)<Props>`
     css`
       border-width: 3px;
       border-color: ${theme.colors.attention};
-      border-style: solid;
     `}
 `;
