@@ -3,10 +3,17 @@
     "name": "gofinances",
     "slug": "gofinances",
     "scheme": "gofinances",
+    "icon": "./src/assets/images/icon.png",
+    "splash": {
+      "image": "./src/assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#5636D3"
+    },
+
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"],
+    "description": "",
+    "githubUrl": "https://github.com/paichato/gofinances"
   },
   "name": "gofinances"
 }
